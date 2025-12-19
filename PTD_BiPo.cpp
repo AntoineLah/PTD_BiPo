@@ -1,4 +1,3 @@
-
 //////////////////////////////////////////////////////////
 //   This file has been automatically generated 
 //     (Tue Jul  8 17:19:42 2025 by ROOT version6.36.000)
@@ -242,9 +241,85 @@ bool closestPointsBetweenLines(
 
 
 void PTD_BiPo(int run){
-    
+        vector<double> OM2kill;    
 
-    
+        if(run >=1546 && run <= 1798 ){ // phase 0
+            std::ifstream inputFile("/sps/nemo/scratch/granjon/full_gain_analysis/Bi/root/compute_a/phase_by_phase_calib/list_om_flag_phase_0.txt");  // open file
+            if (!inputFile) {
+                std::cerr << "Error opening file!" << std::endl;
+            }
+            
+            double number;
+
+            // Read doubles from file
+            while (inputFile >> number) {
+                OM2kill.push_back(number);
+            }
+            inputFile.close();
+        }
+
+        if(run >= 2000 && run <=2672){ // phase 1
+            std::ifstream inputFile("/sps/nemo/scratch/granjon/full_gain_analysis/Bi/root/compute_a/phase_by_phase_calib/list_om_flag_phase_1.txt");  // open file
+            if (!inputFile) {
+                std::cerr << "Error opening file!" << std::endl;
+            }
+            
+            double number;
+
+            // Read doubles from file
+            while (inputFile >> number) {
+                OM2kill.push_back(number);
+            }
+            inputFile.close();
+        }
+        if(run >= 2673 && run <= 2869){ // phase 2a
+            std::ifstream inputFile("/sps/nemo/scratch/granjon/full_gain_analysis/Bi/root/compute_a/phase_by_phase_calib/list_om_phase_2a.txt");  // open file
+            if (!inputFile) {
+                std::cerr << "Error opening file!" << std::endl;
+            }
+            std::string line;
+            std::getline(inputFile, line);
+            
+            double number;
+
+            // Read doubles from file
+            while (inputFile >> number) {
+                OM2kill.push_back(number);
+            }
+            inputFile.close();
+        }
+
+        if(run >= 2870 && run <= 3467){ // phase 2b 
+            std::ifstream inputFile("/sps/nemo/scratch/granjon/full_gain_analysis/Bi/root/compute_a/phase_by_phase_calib/list_om_phase_2b.txt");  // open file
+            if (!inputFile) {
+                std::cerr << "Error opening file!" << std::endl;
+            }
+            std::string line;
+            std::getline(inputFile, line);
+            
+            double number;
+
+            // Read doubles from file
+            while (inputFile >> number) {
+                OM2kill.push_back(number);
+            }
+            inputFile.close();
+
+        }
+        if(run >= 3470 && run < 5000){ // phase 3
+            std::ifstream inputFile("/sps/nemo/scratch/granjon/full_gain_analysis/Bi/root/compute_a/phase_by_phase_calib/list_om_phase_3.txt");  // open file
+            if (!inputFile) {
+                std::cerr << "Error opening file!" << std::endl;
+            }
+            
+            double number;
+
+            // Read doubles from file
+            while (inputFile >> number) {
+                OM2kill.push_back(number);
+            }
+            inputFile.close();
+        }
         std::string folder ="/sps/nemo/scratch/lahaie/FalaiseSkeletonModules/build/out/renamed_files/";
     
         std::cout<<"run ="<<run<<std::endl;
@@ -264,6 +339,7 @@ void PTD_BiPo(int run){
         }
 
         std::string outFileName = "/sps/nemo/scratch/lahaie/FalaiseSkeletonModules/build/out/BiBo/all_phases/" + std::to_string((int)run) + "_out.root";
+        //std::string outFileName = "/sps/nemo/scratch/lahaie/FalaiseSkeletonModules/build/out/BiBo/injection/" + std::to_string((int)run) + "_out.root";
         // ensure output directory exists
         try {
             fs::path p(outFileName);
@@ -291,7 +367,7 @@ void PTD_BiPo(int run){
         if (!particules) {
            std::cerr << "Error: Cannot find the TTree 'particules' in the file " << file_path << " -- skipping file." << std::endl;
            outFile->Close(); delete outFile;
-           f->Close(); delete f;
+           f->Close();
            
         }
 
@@ -406,6 +482,15 @@ void PTD_BiPo(int run){
         vector<int>     *ID_cluster_per_elec_crossing = nullptr;
         vector<int>     *ID_cluster_UND_per_elec_crossing = nullptr;
         bool          tracks_without_associated_calo;
+
+        vector<vector<double>> *und_elec_crossing_xs = nullptr;
+	    vector<vector<double>> *und_elec_crossing_ys = nullptr;
+	    vector<vector<double>> *und_elec_crossing_zs = nullptr;
+
+	    vector<vector<double>> *und_elec_crossing_xe = nullptr ;
+	    vector<vector<double>> *und_elec_crossing_ye = nullptr ;
+	    vector<vector<double>> *und_elec_crossing_ze = nullptr ;
+
         int           nb_of_UND_candidates;
         vector<vector<double> > *cell_num_per_UND_cluster = nullptr;
         vector<vector<double> > *anode_time_per_UND_cluster = nullptr;
@@ -582,6 +667,13 @@ void PTD_BiPo(int run){
         particules->SetBranchAddress("ID_cluster_UND_per_elec_crossing",&ID_cluster_UND_per_elec_crossing);
         particules->SetBranchAddress("elec_is_associated_with_track", &elec_is_associated_with_track);
 
+        particules->SetBranchAddress("und_elec_crossing_xs", &und_elec_crossing_xs);
+        particules->SetBranchAddress("und_elec_crossing_ys", &und_elec_crossing_ys);
+        particules->SetBranchAddress("und_elec_crossing_zs", &und_elec_crossing_zs);
+        particules->SetBranchAddress("und_elec_crossing_xe", &und_elec_crossing_xe);
+        particules->SetBranchAddress("und_elec_crossing_ye", &und_elec_crossing_ye);
+        particules->SetBranchAddress("und_elec_crossing_ze", &und_elec_crossing_ze);
+
         particules->SetBranchAddress("tracks_without_associated_calo",&tracks_without_associated_calo);
         particules->SetBranchAddress("nb_of_UND_candidates",&nb_of_UND_candidates);
         particules->SetBranchAddress("cell_num_per_UND_cluster",&cell_num_per_UND_cluster);
@@ -677,7 +769,7 @@ void PTD_BiPo(int run){
     double vertex_is_on_source_foil_und;
     
     double xM, yM, zM;
-
+    double distance_vertex;
 
 
     double distance_gamma_BiPo_vertex = -1; 
@@ -731,9 +823,11 @@ void PTD_BiPo(int run){
     pairTree->Branch("xM", &xM);
     pairTree->Branch("yM", &yM);
     pairTree->Branch("zM", &zM);
+    pairTree->Branch("distance_vertex", &distance_vertex);
 
     pairTree->Branch("delta_t_e_gamma_th_vs_meas", &delta_t_e_gamma_th_vs_meas);
     pairTree->Branch("E_gamma_BiPo", &E_gamma_BiPo);
+    pairTree->Branch("n_gamm_with_BiPo", &n_gamm_with_BiPo);
 
 
     pairTree->Branch("distance_elec_UND_per_elec_crossing", &t_distance_elec_UND_per_elec_crossing);
@@ -763,12 +857,13 @@ void PTD_BiPo(int run){
         //sndemonstrator->setrange(0,1);
         particules->GetEntry(entry);
         
-
+        delta_t_e_gamma_th_vs_meas.clear();
+        E_gamma_BiPo.clear();
+        n_gamm_with_BiPo = 0;
 
         if(info.found){
-            delta_t_e_gamma_th_vs_meas.clear();
-            E_gamma_BiPo.clear();
-            n_gamm_with_BiPo = 0;
+            
+            
             double time_entry;
             double stop_time = info.tripTime;
             double unix_time_to_stop = info.run_start + stop_time;
@@ -815,6 +910,8 @@ void PTD_BiPo(int run){
                     double y_reference_source = std::numeric_limits<double>::quiet_NaN();
                     double z_reference_source = std::numeric_limits<double>::quiet_NaN();
 
+                    double und_elec_crossing_xs, und_elec_crossing_ys, und_elec_crossing_zs, und_elec_crossing_xe, und_elec_crossing_ye, und_elec_crossing_ze;
+
 		        };
 		        struct PairInfo {
 		            int elecIdx, elecFit;
@@ -859,6 +956,9 @@ void PTD_BiPo(int run){
                         f.y_reference_source = y_is_on_reference_source_plane->at(elec_idx).at(elec_fit_idx);
                         f.z_reference_source = z_is_on_reference_source_plane->at(elec_idx).at(elec_fit_idx);
                         f.vertex_is_on_source_foil = vertex_is_on_source_foil_per_elec_cluster->at(elec_idx).at(elec_fit_idx);
+                       
+                        
+
                         
                         elecFits.push_back(f);
 		            }
@@ -987,10 +1087,11 @@ void PTD_BiPo(int run){
         		    t_elec_energy = E_OM_per_elec_cluster->at(p.elecIdx).at(0);
         		    t_elec_time = OM_timestamp_per_elec_cluster->at(p.elecIdx).at(0);
                     OM_num_elec = p.OM_num;
-                    if(OM_num_elec == 318){
-                        // skip this pair but continue filling other pairs for the same event
-                        continue;
-                    }
+                    
+                    //if(std::find(OM2kill.begin(), OM2kill.end(), OM_num_elec) != OM2kill.end()){ // OM Flag as bad ? if yes then pass this candidates
+                    //    // skip this pair but continue filling other pairs for the same event
+                    //    continue;
+                    //}
                     
 
                     
@@ -1065,12 +1166,15 @@ void PTD_BiPo(int run){
                             xM = M.x;
                             yM = M.y;
                             zM = M.z;
+                            distance_vertex = distance;
                         }
                     
                     } 
+                    
+                    // Here to modified but first need to put correct vector size of und_elec_crossing_ze ! to be able to got with the good idx first & last position ! 
                     else if(t_elec_crossing == true){
-                        Vec3 A  = {t_elec_xs, t_elec_ys, t_elec_zs};
-                        Vec3 B  = {x_reference_source_elec, y_reference_source_elec, z_reference_source_elec};
+                        Vec3 A  = {und_elec_crossing_xs->at(t_elecIdx).at(0), und_elec_crossing_ys->at(t_elecIdx).at(0), und_elec_crossing_zs->at(t_elecIdx).at(0)};
+                        Vec3 B  = {und_elec_crossing_xe->at(t_elecIdx).at(0), und_elec_crossing_ye->at(t_elecIdx).at(0), und_elec_crossing_ze->at(t_elecIdx).at(0)};
                         Vec3 A2 = {t_und_xs, t_und_ys, t_und_zs};
                         Vec3 B2 = {t_und_xe, t_und_ye, t_und_ze};
 
@@ -1090,17 +1194,35 @@ void PTD_BiPo(int run){
                             xM = M.x;
                             yM = M.y;
                             zM = M.z;
+                            distance_vertex = distance;
                         }
                     }
+
                     double elec_track_length = -1;
                     // Compute electron track length
                     if(t_elec_crossing == false){
-                        elec_track_length = sqrt( pow((t_elec_xe - t_elec_xs),2) + pow((t_elec_ye - t_elec_ys),2) + pow((t_elec_ze - t_elec_zs),2) )/1000; // in meters
-                        //std::cout<<"Electron track length: "<<elec_track_length<<std::endl;
+                        if(OM_num_elec<520){
+
+                            elec_track_length = sqrt( pow((x_is_on_main_calorimeter->at(t_elecIdx).at(t_elecFit) - t_elec_xs),2) + pow((y_is_on_main_calorimeter->at(t_elecIdx).at(t_elecFit) - t_elec_ys),2) + pow((z_is_on_main_calorimeter->at(t_elecIdx).at(t_elecFit) - t_elec_zs),2) )/1000; // in meters
+                            //std::cout<<"Electron track length: "<<elec_track_length<<std::endl;
+
+                        }
+                        else if(OM_num_elec>=520){
+                            elec_track_length = sqrt( pow((x_is_on_x_calorimeter->at(t_elecIdx).at(t_elecFit) - t_elec_xs),2) + pow((y_is_on_x_calorimeter->at(t_elecIdx).at(t_elecFit) - t_elec_ys),2) + pow((z_is_on_x_calorimeter->at(t_elecIdx).at(t_elecFit) - t_elec_zs),2) )/1000; // in meters
+                        }
+                        
                     }
-                    else if(t_elec_crossing == true){
+                    double second_part_elec_length;
+                    
+                    if(t_elec_crossing == true){
                         double firt_part_elec_length = sqrt( pow((x_reference_source_elec - t_elec_xs),2) + pow((y_reference_source_elec - t_elec_ys),2) + pow((z_reference_source_elec - t_elec_zs),2) ); // in mm
-                        double second_part_elec_length = sqrt( pow((t_elec_xe - x_reference_source_elec),2) + pow((t_elec_ye - y_reference_source_elec),2) + pow((t_elec_ze - z_reference_source_elec),2) ); // in mm
+                        if(OM_num_elec<520){
+                            second_part_elec_length = sqrt( pow((x_is_on_main_calorimeter->at(t_elecIdx).at(t_elecFit) - x_reference_source_elec),2) + pow((y_is_on_main_calorimeter->at(t_elecIdx).at(t_elecFit) - y_reference_source_elec),2) + pow((z_is_on_main_calorimeter->at(t_elecIdx).at(t_elecFit) - z_reference_source_elec),2) ); // in mm    
+                        }
+                        else if(OM_num_elec>=520){
+                            second_part_elec_length = sqrt( pow((x_is_on_x_calorimeter->at(t_elecIdx).at(t_elecFit) - x_reference_source_elec),2) + pow((y_is_on_x_calorimeter->at(t_elecIdx).at(t_elecFit) - y_reference_source_elec),2) + pow((z_is_on_x_calorimeter->at(t_elecIdx).at(t_elecFit) - z_reference_source_elec),2) ); // in mm
+                        }
+                        
 
                         elec_track_length = (firt_part_elec_length + second_part_elec_length)/1000; // in meters
                     }
@@ -1120,9 +1242,12 @@ void PTD_BiPo(int run){
                             }
                             double expected_TOF_gamma = distance_gamma_BiPo_vertex/c;
                             double measured_TOF_gamma = t_elec_time - isolated_calo_timestamp->at(calo_idx);
+                            double beta = sqrt(t_elec_energy*(t_elec_energy + 2*0.511/pow(c, 2)))/(t_elec_energy+ 2*0.511);
+                            double expected_TOF_elec = elec_track_length/(beta*c);
                             n_gamm_with_BiPo ++;
 
-                            delta_t_e_gamma_th_vs_meas.push_back(expected_TOF_gamma - measured_TOF_gamma);
+                            //delta_t_e_gamma_th_vs_meas.push_back(expected_TOF_gamma - measured_TOF_gamma);
+                            delta_t_e_gamma_th_vs_meas.push_back(isolated_calo_timestamp->at(calo_idx) - t_elec_time - (expected_TOF_gamma - expected_TOF_elec) );
                             E_gamma_BiPo.push_back(E_isolated_calo->at(calo_idx));
                         }
                     }
