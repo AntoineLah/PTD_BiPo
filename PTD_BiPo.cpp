@@ -241,497 +241,579 @@ bool closestPointsBetweenLines(
 
 
 void PTD_BiPo(int run){
-        vector<double> OM2kill;    
+    vector<int> OM2kill;
+        
+    bool MC = false;
+    std::string vertex_MC = "FWS";
+    std::string phase = "phase_2b";
+    std::string path_MC = "/sps/nemo/scratch/lahaie/simu/official_MC/" + vertex_MC + "/extracted/" + phase;
 
-        if(run >=1546 && run <= 1798 ){ // phase 0
-            std::ifstream inputFile("/sps/nemo/scratch/granjon/full_gain_analysis/Bi/root/compute_a/phase_by_phase_calib/list_om_flag_phase_0.txt");  // open file
-            if (!inputFile) {
-                std::cerr << "Error opening file!" << std::endl;
-            }
-            
-            double number;
-
-            // Read doubles from file
-            while (inputFile >> number) {
-                OM2kill.push_back(number);
-            }
-            inputFile.close();
+    if(run >=1546 && run <= 1798 || (MC == true && phase == "phase_0")){ // phase 0
+        std::string file_list_om_phase = "/sps/nemo/scratch/granjon/full_gain_analysis/Bi/root/compute_a/phase_by_phase_calib/list_om_flag_phase_0.txt";
+        std::ifstream inputFile(file_list_om_phase);  // open file
+        std::cout<<"reading file: "<<file_list_om_phase<<std::endl;
+        if (!inputFile) {
+            std::cerr << "Error opening file!" << std::endl;
         }
-
-        if(run >= 2000 && run <=2672){ // phase 1
-            std::ifstream inputFile("/sps/nemo/scratch/granjon/full_gain_analysis/Bi/root/compute_a/phase_by_phase_calib/list_om_flag_phase_1.txt");  // open file
-            if (!inputFile) {
-                std::cerr << "Error opening file!" << std::endl;
-            }
-            
-            double number;
-
-            // Read doubles from file
-            while (inputFile >> number) {
-                OM2kill.push_back(number);
-            }
-            inputFile.close();
+        
+        int number;
+        // Read doubles from file
+        while (inputFile >> number) {
+            OM2kill.push_back(number);
         }
-        if(run >= 2673 && run <= 2869){ // phase 2a
-            std::ifstream inputFile("/sps/nemo/scratch/granjon/full_gain_analysis/Bi/root/compute_a/phase_by_phase_calib/list_om_phase_2a.txt");  // open file
-            if (!inputFile) {
-                std::cerr << "Error opening file!" << std::endl;
-            }
-            std::string line;
-            std::getline(inputFile, line);
-            
-            double number;
+        inputFile.close();
+    }
 
-            // Read doubles from file
-            while (inputFile >> number) {
-                OM2kill.push_back(number);
-            }
-            inputFile.close();
+    if(run >= 2000 && run <=2672 || (MC == true && phase == "phase_1")){ // phase 1
+        std::string file_list_om_phase = "/sps/nemo/scratch/granjon/full_gain_analysis/Bi/root/compute_a/phase_by_phase_calib/list_om_flag_phase_1.txt";
+        std::ifstream inputFile(file_list_om_phase);  // open file
+        std::cout<<"reading file: "<<file_list_om_phase<<std::endl;
+        if (!inputFile) {
+            std::cerr << "Error opening file!" << std::endl;
         }
-
-        if(run >= 2870 && run <= 3467){ // phase 2b 
-            std::ifstream inputFile("/sps/nemo/scratch/granjon/full_gain_analysis/Bi/root/compute_a/phase_by_phase_calib/list_om_phase_2b.txt");  // open file
-            if (!inputFile) {
-                std::cerr << "Error opening file!" << std::endl;
-            }
-            std::string line;
-            std::getline(inputFile, line);
-            
-            double number;
-
-            // Read doubles from file
-            while (inputFile >> number) {
-                OM2kill.push_back(number);
-            }
-            inputFile.close();
-
+        
+        int number;
+        // Read doubles from file
+        while (inputFile >> number) {
+            OM2kill.push_back(number);
         }
-        if(run >= 3470 && run < 5000){ // phase 3
-            std::ifstream inputFile("/sps/nemo/scratch/granjon/full_gain_analysis/Bi/root/compute_a/phase_by_phase_calib/list_om_phase_3.txt");  // open file
-            if (!inputFile) {
-                std::cerr << "Error opening file!" << std::endl;
-            }
+        inputFile.close();
+    }
+    if(run >= 2673 && run <= 2869 || (MC == true && phase == "phase_2b")){ // phase 2a
             
-            double number;
-
-            // Read doubles from file
-            while (inputFile >> number) {
-                OM2kill.push_back(number);
-            }
-            inputFile.close();
+        std::string file_list_om_phase = "/sps/nemo/scratch/granjon/full_gain_analysis/Bi/root/compute_a/phase_by_phase_calib/list_om_phase_2a.txt";
+        std::ifstream inputFile(file_list_om_phase);  // open file
+        if (!inputFile) {
+            std::cerr << "Error opening file!" << std::endl;
         }
-        std::string folder ="/sps/nemo/scratch/lahaie/FalaiseSkeletonModules/build/out/renamed_files/";
+        std::string line;
+        std::getline(inputFile, line);
+            
+        int number;
+
+        // Read doubles from file
+        while (inputFile >> number) {
+            OM2kill.push_back(number);
+        }
+        inputFile.close();
+    }
+
+    if(run >= 2870 && run <= 3467 || (MC == true && phase == "phase_2b")){ // phase 2b 
+        std::string file_list_om_phase ="/sps/nemo/scratch/granjon/full_gain_analysis/Bi/root/compute_a/phase_by_phase_calib/list_om_phase_2b.txt";
+        std::ifstream inputFile(file_list_om_phase);  // open file
+        std::cout<<"reading file: "<<file_list_om_phase<<std::endl;
+         if (!inputFile) {
+            std::cerr << "Error opening file!" << std::endl;
+        }
+        if (!inputFile) {
+            std::cerr << "Error opening file!" << std::endl;
+        }
+        std::string line;
+        std::getline(inputFile, line);
+        
+        int number;
+        // Read doubles from file
+        while (inputFile >> number) {
+            OM2kill.push_back(number);
+        }
+        inputFile.close();
+    }
+    if(run >= 3470 && run < 5000 || (MC == true && phase == "phase_3")){ // phase 3
+        std::string file_list_om_phase = "/sps/nemo/scratch/granjon/full_gain_analysis/Bi/root/compute_a/phase_by_phase_calib/list_om_phase_3.txt"; 
+        std::ifstream inputFile(file_list_om_phase);  // open file
+        std::cout<<"reading file: "<<file_list_om_phase<<std::endl;
+        if (!inputFile) {
+            std::cerr << "Error opening file!" << std::endl;
+        }
+        
+        int number;
+        // Read doubles from file
+        while (inputFile >> number) {
+            OM2kill.push_back(number);
+        }
+        inputFile.close();
+    }
+    std::string folder;
+    std::string file_path;
+    if(MC==true){
+        folder = path_MC;
+        file_path = folder + "/renamed_files/PTD_extracted_" + std::to_string((int)run) + ".root";
+    }
+    else{
+        folder ="/sps/nemo/scratch/lahaie/FalaiseSkeletonModules/build/out/renamed_files/";
+        file_path = folder + "PTD_extracted_" + std::to_string((int)run) + ".root";
+    }
+        
     
-        std::cout<<"run ="<<run<<std::endl;
-        std::string file_path = folder + "PTD_extracted_" + std::to_string((int)run) + ".root";
-        std::cout << "Processing file: " << file_path << std::endl;
+    std::cout<<"run = "<<run<<std::endl;
         
-        RunInfo info = getRunInfo(run);
+    std::cout << "Processing file: " << file_path << std::endl;
         
-        //sndisplay::demonstrator *sndemonstrator = new sndisplay::demonstrator ("demonstrator_test");
-        //sndemonstrator->setrange(0,1);
-        // Open the ROOT file
-        TFile *f = TFile::Open(file_path.c_str(), "READ");
-        if(!f || f->IsZombie()){
-            std::cerr << "Error: cannot open input file " << file_path << std::endl;
-            if(f){ f->Close(); delete f; }
-            
-        }
+    RunInfo info;
+    if(MC==false){
+        std::cout<<"Getting run info for run number: " << run << std::endl;
+        info = getRunInfo(run);
+        std::cout<<"info.found = "<<info.found<<std::endl;
+    } 
+        
+    //sndisplay::demonstrator *sndemonstrator = new sndisplay::demonstrator ("demonstrator_test");
+    //sndemonstrator->setrange(0,1);
+    // Open the ROOT file
+    TFile *f = TFile::Open(file_path.c_str(), "READ");
+    if(!f || f->IsZombie()){
+        std::cerr << "Error: cannot open input file " << file_path << std::endl;
+        if(f){ f->Close(); delete f; }
+        
+    }
 
-        std::string outFileName = "/sps/nemo/scratch/lahaie/FalaiseSkeletonModules/build/out/BiBo/all_phases/" + std::to_string((int)run) + "_out.root";
-        //std::string outFileName = "/sps/nemo/scratch/lahaie/FalaiseSkeletonModules/build/out/BiBo/injection/" + std::to_string((int)run) + "_out.root";
-        // ensure output directory exists
-        try {
-            fs::path p(outFileName);
-            if(!p.has_parent_path()){
-                std::cerr << "Warning: output path has no parent: " << outFileName << std::endl;
-            } else {
-                fs::create_directories(p.parent_path());
-            }
-        } catch(const std::exception &e){
-            std::cerr << "Error creating output directory: " << e.what() << std::endl;
-            f->Close(); delete f;
-            
-        }
+    std::string outFileName;
+    if(MC==true){
 
-        TFile *outFile = TFile::Open(outFileName.c_str(), "RECREATE");
-        if(!outFile || outFile->IsZombie()){
-            std::cerr << "Error: cannot create output file " << outFileName << std::endl;
-            if(outFile){ outFile->Close(); delete outFile; }
-            f->Close(); delete f;
-            
-        }
+        outFileName = folder + "/BiPo/" + std::to_string((int)run) + "_.root";
+        
+    }
+    else{
+        outFileName = "/sps/nemo/scratch/lahaie/FalaiseSkeletonModules/build/out/BiBo/all_effects/" + std::to_string((int)run) + "_out.root";
+                
+    }
+    std::cout<<"file saved in : "<<outFileName<<std::endl;
 
-        // Get the TTree
-        TTree *particules = dynamic_cast<TTree*>(f->Get("particules"));
-        if (!particules) {
-           std::cerr << "Error: Cannot find the TTree 'particules' in the file " << file_path << " -- skipping file." << std::endl;
-           outFile->Close(); delete outFile;
-           f->Close();
-           
+    //outFileName = "/sps/nemo/scratch/lahaie/FalaiseSkeletonModules/build/out/BiBo/without_gamma_with_ufc_wo_unstable_OMs/" + std::to_string((int)run) + "_out.root";
+    //std::string outFileName = "/sps/nemo/scratch/lahaie/FalaiseSkeletonModules/build/out/BiBo/injection/" + std::to_string((int)run) + "_out.root";
+    // ensure output directory exists
+    try {
+        fs::path p(outFileName);
+        if(!p.has_parent_path()){
+            std::cerr << "Warning: output path has no parent: " << outFileName << std::endl;
+        } else {
+            fs::create_directories(p.parent_path());
         }
+    } catch(const std::exception &e){
+        std::cerr << "Error creating output directory: " << e.what() << std::endl;
+        f->Close(); delete f;
+        
+    }
+
+    TFile *outFile = TFile::Open(outFileName.c_str(), "RECREATE");
+    if(!outFile || outFile->IsZombie()){
+        std::cerr << "Error: cannot create output file " << outFileName << std::endl;
+        if(outFile){ outFile->Close(); delete outFile; }
+        f->Close(); delete f;
+            
+    }
+
+    // Get the TTree
+    TTree *particules = dynamic_cast<TTree*>(f->Get("particules"));
+    if (!particules) {
+       std::cerr << "Error: Cannot find the TTree 'particules' in the file " << file_path << " -- skipping file." << std::endl;
+       outFile->Close(); delete outFile;
+       f->Close();
+       
+    }
 
         
 
    
-        //Declaration of leaves types
-        int event_number ;
-        int nb_isolated_calo ;
-        vector<double>  *E_isolated_calo = nullptr;
-        vector<double>  *time_isolated_calo = nullptr;
-        vector<double>  *sigma_E_isolated_calo = nullptr;
-        vector<double>  *sigma_time_isolated_calo = nullptr;
-        vector<char>    *isolated_calo_type = nullptr;
-        vector<double>  *isolated_calo_timestamp = nullptr;
-        vector<double>  *isolated_calo_charge = nullptr;
-        vector<double>  *isolated_calo_amplitude = nullptr;
-        vector<double>  *isolated_calo_num = nullptr;
-        vector<double>  *sigma_isolated_calo_timestamp = nullptr;
-        vector<double>  *sigma_isolated_calo_charge = nullptr;
-        vector<double>  *sigma_isolated_calo_amplitude = nullptr;
-        bool          evt_isolated_calo;
-        vector<bool>    *isolated_calo_low_threshold_only = nullptr;
-        vector<bool>    *isolated_calo_high_threshold = nullptr;
-        vector<double> *x_calo_gamma = nullptr; 
-        vector<double> *y_calo_gamma = nullptr;
-        vector<double> *z_calo_gamma = nullptr; 
-        bool          tracks_with_associated_calo ;
-        int           nb_of_elec_candidates;
-        vector<vector<double> > *cell_num_per_elec_cluster = nullptr;
-        vector<vector<double> > *OM_num_per_elec_cluster = nullptr;
-        vector<vector<double> > *E_OM_per_elec_cluster = nullptr;
-        vector<double>           *nb_of_OM_per_elec_cluster = nullptr;
-        vector<vector<double> > *anode_time_per_elec_cluster = nullptr;
-        vector<vector<double> > *top_cathode_per_elec_cluster = nullptr;
-        vector<vector<double> > *bottom_cathode_per_elec_cluster = nullptr;
-        vector<vector<double> > *OM_timestamp_per_elec_cluster = nullptr;
-        vector<vector<double> > *OM_charge_per_elec_cluster = nullptr;
-        vector<vector<double> > *OM_amplitude_per_elec_cluster = nullptr;
-        vector<vector<double> > *OM_LT_only_per_elec_cluster = nullptr;
-        vector<vector<double> > *OM_HT_per_elec_cluster= nullptr;
-        vector<vector<double> > *z_of_cells_per_elec_cluster= nullptr;
-        vector<vector<double> > *sigma_z_of_cells_per_elec_cluster= nullptr;
-        vector<vector<double> > *r_of_cells_per_elec_cluster= nullptr;
-        vector<vector<double> > *sigma_r_of_cells_per_elec_cluster= nullptr;
-        vector<bool>    *elec_cluster_is_delayed = nullptr;
-        vector<bool>    *elec_clsuter_is_prompt = nullptr;
-        vector<vector<double> > *x_start_per_elec_cluster = nullptr;
-        vector<vector<double> > *y_start_per_elec_cluster = nullptr;
-        vector<vector<double> > *z_start_per_elec_cluster = nullptr;
-        vector<vector<double> > *x_end_per_elec_cluster = nullptr;
-        vector<vector<double> > *y_end_per_elec_cluster = nullptr;
-        vector<vector<double> > *z_end_per_elec_cluster = nullptr;
-        vector<int>     *ID_clsuter_per_elec_cluster = nullptr;
-        vector<int>     *nb_fit_solution_per_elec_cluster = nullptr;
-        vector<double>  *nb_cell_per_elec_cluster = nullptr;
-        vector<vector<double> > *x_is_on_reference_source_plane = nullptr;
-        vector<vector<double> > *y_is_on_reference_source_plane = nullptr;
-        vector<vector<double> > *z_is_on_reference_source_plane = nullptr;
-        vector<vector<double> > *x_is_on_source_foil = nullptr;
-        vector<vector<double> > *y_is_on_source_foil = nullptr;
-        vector<vector<double> > *z_is_on_source_foil = nullptr;
-        vector<vector<double> > *x_is_on_main_calorimeter = nullptr;
-        vector<vector<double> > *y_is_on_main_calorimeter = nullptr;
-        vector<vector<double> > *z_is_on_main_calorimeter = nullptr;
-        vector<vector<double> > *x_is_on_x_calorimeter = nullptr;
-        vector<vector<double> > *y_is_on_x_calorimeter = nullptr;
-        vector<vector<double> > *z_is_on_x_calorimeter = nullptr;
-        vector<vector<double> > *x_is_on_gamma_veto = nullptr;
-        vector<vector<double> > *y_is_on_gamma_veto = nullptr;
-        vector<vector<double> > *z_is_on_gamma_veto = nullptr;
-        vector<vector<double> > *x_is_on_wire = nullptr;
-        vector<vector<double> > *y_is_on_wire = nullptr;
-        vector<vector<double> > *z_is_on_wire = nullptr;
-        vector<vector<double> > *x_is_in_gas = nullptr;
-        vector<vector<double> > *y_is_in_gas = nullptr;
-        vector<vector<double> > *z_is_in_gas = nullptr;
-        vector<vector<double> > *x_is_on_source_gap = nullptr;
-        vector<vector<double> > *y_is_on_source_gap = nullptr;
-        vector<vector<double> > *z_is_on_source_gap = nullptr;
-        vector<vector<double> > *xy_distance_from_reference_source_plane = nullptr;
-        vector<vector<double> > *xy_distance_from_source_foil = nullptr;
-        vector<vector<double> > *xy_distance_from_main_calorimeter = nullptr;
-        vector<vector<double> > *xy_distance_from_x_calorimeter = nullptr;
-        vector<vector<double> > *xy_distance_from_gamma_veto = nullptr;
-        vector<vector<double> > *xy_distance_from_wire = nullptr;
-        vector<vector<double> > *xy_distance_from_gas = nullptr;
-        vector<vector<double> > *xy_distance_from_source_gap = nullptr;
-        vector<vector<double> > *xyz_distance_from_reference_source_plane = nullptr;
-        vector<vector<double> > *xyz_distance_from_source_foil = nullptr;
-        vector<vector<double> > *xyz_distance_from_main_calorimeter = nullptr;
-        vector<vector<double> > *xyz_distance_from_x_calorimeter = nullptr;
-        vector<vector<double> > *xyz_distance_from_gamma_veto = nullptr;
-        vector<vector<double> > *xyz_distance_from_wire = nullptr;
-        vector<vector<double> > *xyz_distance_from_gas = nullptr;
-        vector<vector<double> > *xyz_distance_from_source_gap = nullptr;
-        vector<vector<double> > *vertex_is_on_reference_source_plane_per_elec_cluster = nullptr;
-        vector<vector<double> > *vertex_is_on_source_foil_per_elec_cluster = nullptr;
-        vector<vector<double> > *vertex_is_on_main_calorimeter_per_elec_cluster = nullptr;
-        vector<vector<double> > *vertex_is_on_x_calorimeter_per_elec_cluster = nullptr;
-        vector<vector<double> > *vertex_is_on_gamma_veto_per_elec_cluster = nullptr;
-        vector<vector<double> > *vertex_is_on_wire_per_elec_cluster = nullptr;
-        vector<vector<double> > *vertex_is_in_gas_per_elec_cluster = nullptr;
-        vector<vector<double> > *vertex_is_on_source_gap_per_elec_cluster = nullptr;
-        vector<vector<double> > *distance_elec_UND_per_elec_crossing = nullptr;
-        int           nb_elec_crossing;
-        vector<vector<double> > *delta_t_cells_of_UND_per_elec_crossing = nullptr;
-        vector<vector<double> > *delta_t_cells_of_elec_per_elec_crossing = nullptr;
-        vector<bool>    *elec_used = nullptr;
-        vector<bool>    *und_used = nullptr;
-        vector<double>  *nb_of_cell_per_elec_crossing = nullptr;
-        vector<int>     *ID_cluster_per_elec_crossing = nullptr;
-        vector<int>     *ID_cluster_UND_per_elec_crossing = nullptr;
-        bool          tracks_without_associated_calo;
+    // Declaration of leaf types
+    int           event_number;
+    int           nb_isolated_calo;
+    vector<double>  *E_isolated_calo = nullptr;
+    vector<double>  *time_isolated_calo = nullptr;
+    vector<double>  *sigma_E_isolated_calo = nullptr;
+    vector<double>  *sigma_time_isolated_calo = nullptr;
+    vector<char>    *isolated_calo_type = nullptr;
+    vector<double>  *isolated_calo_timestamp = nullptr;
+    vector<double>  *isolated_calo_charge = nullptr;
+    vector<double>  *isolated_calo_amplitude = nullptr;
+    vector<double>  *isolated_calo_num = nullptr;
+    vector<double>  *sigma_isolated_calo_timestamp = nullptr;
+    vector<double>  *sigma_isolated_calo_charge = nullptr;
+    vector<double>  *sigma_isolated_calo_amplitude = nullptr;
+    bool             evt_isolated_calo;
+    vector<bool>    *isolated_calo_low_threshold_only = nullptr;
+    vector<bool>    *isolated_calo_high_threshold = nullptr;
+    vector<double>  *x_calo_gamma = nullptr;
+    vector<double>  *y_calo_gamma = nullptr;
+    vector<double>  *z_calo_gamma = nullptr;
+    vector<bool> *gamma_with_unfitted_track = nullptr;
 
-        vector<vector<double>> *und_elec_crossing_xs = nullptr;
-	    vector<vector<double>> *und_elec_crossing_ys = nullptr;
-	    vector<vector<double>> *und_elec_crossing_zs = nullptr;
+    bool          tracks_with_associated_calo;
+    int           nb_of_elec_candidates;
+    vector<vector<double> > *cell_num_per_elec_cluster = nullptr;
+    vector<vector<double> > *OM_num_per_elec_cluster = nullptr;
+    vector<vector<double> > *E_OM_per_elec_cluster = nullptr;
+    vector<double>  *nb_of_OM_per_elec_cluster = nullptr;
+    vector<vector<double> > *anode_time_per_elec_cluster = nullptr;
+    vector<vector<double> > *top_cathode_per_elec_cluster = nullptr;
+    vector<vector<double> > *bottom_cathode_per_elec_cluster = nullptr;
+    vector<vector<double> > *OM_timestamp_per_elec_cluster = nullptr;
+    vector<vector<double> > *OM_charge_per_elec_cluster = nullptr;
+    vector<vector<double> > *OM_amplitude_per_elec_cluster = nullptr;
+    vector<vector<double> > *OM_LT_only_per_elec_cluster = nullptr;
+    vector<vector<double> > *OM_HT_per_elec_cluster = nullptr;
+    vector<vector<double> > *z_of_cells_per_elec_cluster = nullptr;
+    vector<vector<double> > *sigma_z_of_cells_per_elec_cluster = nullptr;
+    vector<vector<double> > *r_of_cells_per_elec_cluster = nullptr;
+    vector<vector<double> > *sigma_r_of_cells_per_elec_cluster = nullptr;
+    vector<bool>    *elec_cluster_is_delayed = nullptr;
+    vector<bool>    *elec_clsuter_is_prompt = nullptr;
+    vector<vector<double> > *x_start_per_elec_cluster = nullptr;
+    vector<vector<double> > *y_start_per_elec_cluster = nullptr;
+    vector<vector<double> > *z_start_per_elec_cluster = nullptr;
+    vector<vector<double> > *x_end_per_elec_cluster = nullptr;
+    vector<vector<double> > *y_end_per_elec_cluster = nullptr;
+    vector<vector<double> > *z_end_per_elec_cluster = nullptr;
+    vector<int>     *ID_clsuter_per_elec_cluster = nullptr;
+    vector<int>     *nb_fit_solution_per_elec_cluster = nullptr;
+    vector<double>  *nb_cell_per_elec_cluster = nullptr;
+    vector<vector<double> > *time_diff_OM_elec_per_elec_cluster = nullptr;
+    vector<vector<double> > *min_dist_r_calo_elefc_cluster = nullptr;
+    vector<vector<double> > *x_is_on_reference_source_plane = nullptr;
+    vector<vector<double> > *y_is_on_reference_source_plane = nullptr;
+    vector<vector<double> > *z_is_on_reference_source_plane = nullptr;
+    vector<vector<double> > *x_is_on_source_foil = nullptr;
+    vector<vector<double> > *y_is_on_source_foil = nullptr;
+    vector<vector<double> > *z_is_on_source_foil = nullptr;
+    vector<vector<double> > *x_is_on_main_calorimeter = nullptr;
+    vector<vector<double> > *y_is_on_main_calorimeter = nullptr;
+    vector<vector<double> > *z_is_on_main_calorimeter = nullptr;
+    vector<vector<double> > *x_is_on_x_calorimeter = nullptr;
+    vector<vector<double> > *y_is_on_x_calorimeter = nullptr;
+    vector<vector<double> > *z_is_on_x_calorimeter = nullptr;
+    vector<vector<double> > *x_is_on_gamma_veto = nullptr;
+    vector<vector<double> > *y_is_on_gamma_veto = nullptr;
+    vector<vector<double> > *z_is_on_gamma_veto = nullptr;
+    vector<vector<double> > *x_is_on_wire = nullptr;
+    vector<vector<double> > *y_is_on_wire = nullptr;
+    vector<vector<double> > *z_is_on_wire = nullptr;
+    vector<vector<double> > *x_is_in_gas = nullptr;
+    vector<vector<double> > *y_is_in_gas = nullptr;
+    vector<vector<double> > *z_is_in_gas = nullptr;
+    vector<vector<double> > *x_is_on_source_gap = nullptr;
+    vector<vector<double> > *y_is_on_source_gap = nullptr;
+    vector<vector<double> > *z_is_on_source_gap = nullptr;
+    vector<vector<double> > *xy_distance_from_reference_source_plane = nullptr;
+    vector<vector<double> > *xy_distance_from_source_foil = nullptr;
+    vector<vector<double> > *xy_distance_from_main_calorimeter = nullptr;
+    vector<vector<double> > *xy_distance_from_x_calorimeter = nullptr;
+    vector<vector<double> > *xy_distance_from_gamma_veto = nullptr;
+    vector<vector<double> > *xy_distance_from_wire = nullptr;
+    vector<vector<double> > *xy_distance_from_gas = nullptr;
+    vector<vector<double> > *xy_distance_from_source_gap = nullptr;
+    vector<vector<double> > *xyz_distance_from_reference_source_plane = nullptr;
+    vector<vector<double> > *xyz_distance_from_source_foil = nullptr;
+    vector<vector<double> > *xyz_distance_from_main_calorimeter = nullptr;
+    vector<vector<double> > *xyz_distance_from_x_calorimeter = nullptr;
+    vector<vector<double> > *xyz_distance_from_gamma_veto = nullptr;
+    vector<vector<double> > *xyz_distance_from_wire = nullptr;
+    vector<vector<double> > *xyz_distance_from_gas = nullptr;
+    vector<vector<double> > *xyz_distance_from_source_gap = nullptr;
+    vector<vector<double> > *vertex_is_on_reference_source_plane_per_elec_cluster = nullptr;
+    vector<vector<double> > *vertex_is_on_source_foil_per_elec_cluster = nullptr;
+    vector<vector<double> > *vertex_is_on_main_calorimeter_per_elec_cluster = nullptr;
+    vector<vector<double> > *vertex_is_on_x_calorimeter_per_elec_cluster = nullptr;
+    vector<vector<double> > *vertex_is_on_gamma_veto_per_elec_cluster = nullptr;
+    vector<vector<double> > *vertex_is_on_wire_per_elec_cluster = nullptr;
+    vector<vector<double> > *vertex_is_in_gas_per_elec_cluster = nullptr;
+    vector<vector<double> > *vertex_is_on_source_gap_per_elec_cluster = nullptr;
+    vector<vector<double> > *distance_elec_UND_per_elec_crossing = nullptr;
+    int           nb_elec_crossing;
+    vector<vector<double> > *delta_t_cells_of_UND_per_elec_crossing = nullptr;
+    vector<vector<double> > *delta_t_cells_of_elec_per_elec_crossing = nullptr;
+    vector<bool>    *elec_used = nullptr;
+    vector<bool>    *und_used = nullptr;
+    vector<double>  *nb_of_cell_per_elec_crossing = nullptr;
+    vector<int>     *ID_cluster_per_elec_crossing = nullptr;
+    vector<int>     *ID_cluster_UND_per_elec_crossing = nullptr;
+    vector<double>  *nb_cell_UND_of_elec_crossing = nullptr;
+    vector<vector<double> > *radius_of_cell_UND_of_elec_crossing = nullptr;
+    vector<vector<double> > *all_dt_cells_UND_per_elec_crossing = nullptr;
+    vector<vector<double> > *und_elec_crossing_xs = nullptr;
+    vector<vector<double> > *und_elec_crossing_ys = nullptr;
+    vector<vector<double> > *und_elec_crossing_zs = nullptr;
+    vector<vector<double> > *und_elec_crossing_xe = nullptr;
+    vector<vector<double> > *und_elec_crossing_ye = nullptr;
+    vector<vector<double> > *und_elec_crossing_ze = nullptr;
+    vector<int>     *elec_is_associated_with_track = nullptr;
+    bool          tracks_without_associated_calo;
+    int           nb_of_UND_candidates;
+    vector<vector<double> > *cell_num_per_UND_cluster = nullptr;
+    vector<vector<double> > *anode_time_per_UND_cluster = nullptr;
+    vector<vector<double> > *top_cathodes_per_UND_cluster = nullptr;
+    vector<vector<double> > *bottom_cathodes_per_UND_cluster = nullptr;
+    vector<vector<double> > *z_of_cell_per_UND_cluster = nullptr;
+    vector<vector<double> > *sigma_z_of_cells_per_UND_cluster = nullptr;
+    vector<vector<double> > *r_of_cells_per_UND_cluster = nullptr;
+    vector<vector<double> > *sigma_r_of_cells_per_UND_cluster = nullptr;
+    vector<bool>    *UND_cluster_is_delayed = nullptr;
+    vector<bool>    *UND_cluster_is_prompt = nullptr;
+    vector<int>     *ID_clsuter_UND = nullptr;
+    vector<vector<double> > *x_start_per_UND_cluster = nullptr;
+    vector<vector<double> > *y_start_per_UND_cluster = nullptr;
+    vector<vector<double> > *z_start_per_UND_cluster = nullptr;
+    vector<vector<double> > *x_end_per_UND_cluster = nullptr;
+    vector<vector<double> > *y_end_per_UND_cluster = nullptr;
+    vector<vector<double> > *z_end_per_UND_cluster = nullptr;
+    vector<int>     *nb_cell_per_UND_cluster = nullptr;
+    vector<double>  *min_time_per_UND_cluster = nullptr;
+    vector<int>     *nb_fit_solution_per_UND_cluster = nullptr;
+    vector<vector<double> > *x_is_on_reference_source_plane_per_UND_cluster = nullptr;
+    vector<vector<double> > *y_is_on_reference_source_plane_per_UND_cluster = nullptr;
+    vector<vector<double> > *z_is_on_reference_source_plane_per_UND_cluster = nullptr;
+    vector<vector<double> > *x_is_on_source_foil_per_UND_cluster = nullptr;
+    vector<vector<double> > *y_is_on_source_foil_per_UND_cluster = nullptr;
+    vector<vector<double> > *z_is_on_source_foil_per_UND_cluster = nullptr;
+    vector<vector<double> > *x_is_on_wire_per_UND_cluster = nullptr;
+    vector<vector<double> > *y_is_on_wire_per_UND_cluster = nullptr;
+    vector<vector<double> > *z_is_on_wire_per_UND_cluster = nullptr;
+    vector<vector<double> > *x_is_in_gas_per_UND_cluster = nullptr;
+    vector<vector<double> > *y_is_in_gas_per_UND_cluster = nullptr;
+    vector<vector<double> > *z_is_in_gas_per_UND_cluster = nullptr;
+    vector<vector<double> > *x_is_on_source_gap_per_UND_cluster = nullptr;
+    vector<vector<double> > *y_is_on_source_gap_per_UND_cluster = nullptr;
+    vector<vector<double> > *z_is_on_source_gap_per_UND_cluster = nullptr;
+    vector<vector<double> > *xy_distance_from_reference_source_plane_per_UND_cluster = nullptr;
+    vector<vector<double> > *xy_distance_from_source_foil_per_UND_cluster = nullptr;
+    vector<vector<double> > *xy_distance_from_wire_per_UND_cluster = nullptr;
+    vector<vector<double> > *xy_distance_from_gas_per_UND_cluster = nullptr;
+    vector<vector<double> > *xy_distance_from_source_gap_per_UND_cluster = nullptr;
+    vector<vector<double> > *xyz_distance_from_reference_source_plane_per_UND_cluster = nullptr;
+    vector<vector<double> > *xyz_distance_from_source_foil_per_UND_cluster = nullptr;
+    vector<vector<double> > *xyz_distance_from_wire_per_UND_cluster = nullptr;
+    vector<vector<double> > *xyz_distance_from_gas_per_UND_cluster = nullptr;
+    vector<vector<double> > *xyz_distance_from_source_gap_per_UND_cluster = nullptr;
+    bool          UND_is_on_reference_source_plane;
+    bool          UND_is_on_source_foil;
+    bool          UND_is_on_wire;
+    bool          UND_is_in_gas;
+    bool          UND_is_on_source_gap;
+    vector<vector<double> > *vertex_is_on_reference_source_plane_per_UND_cluster = nullptr;
+    vector<vector<double> > *vertex_is_on_source_foil_per_UND_cluster = nullptr;
+    vector<vector<double> > *vertex_is_on_wire_per_UND_cluster = nullptr;
+    vector<vector<double> > *vertex_is_in_gas_per_UND_cluster = nullptr;
+    vector<vector<double> > *vertex_is_on_source_gap_per_UND_cluster = nullptr;
+    vector<bool> *und_is_corrolated_with_gamma = nullptr;
+    vector<vector<double>> *delta_t_UND_gamma_per_UND_cluster = nullptr;
 
-	    vector<vector<double>> *und_elec_crossing_xe = nullptr ;
-	    vector<vector<double>> *und_elec_crossing_ye = nullptr ;
-	    vector<vector<double>> *und_elec_crossing_ze = nullptr ;
-
-        int           nb_of_UND_candidates;
-        vector<vector<double> > *cell_num_per_UND_cluster = nullptr;
-        vector<vector<double> > *anode_time_per_UND_cluster = nullptr;
-        vector<vector<double> > *top_cathodes_per_UND_cluster = nullptr;
-        vector<vector<double> > *bottom_cathodes_per_UND_cluster = nullptr;
-        vector<vector<double> > *z_of_cell_per_UND_cluster = nullptr;
-        vector<vector<double> > *sigma_z_of_cells_per_UND_cluster = nullptr;
-        vector<vector<double> > *r_of_cells_per_UND_cluster = nullptr ;
-        vector<vector<double> > *sigma_r_of_cells_per_UND_cluster = nullptr;
-        vector<bool>    *UND_cluster_is_delayed = nullptr;
-        vector<bool>    *UND_cluster_is_prompt = nullptr;
-        vector<int>     *ID_clsuter_UND = nullptr;
-        vector<vector<double> > *x_start_per_UND_cluster = nullptr;
-        vector<vector<double> > *y_start_per_UND_cluster = nullptr;
-        vector<vector<double> > *z_start_per_UND_cluster = nullptr;
-        vector<vector<double> > *x_end_per_UND_cluster = nullptr;
-        vector<vector<double> > *y_end_per_UND_cluster = nullptr;
-        vector<vector<double> > *z_end_per_UND_cluster = nullptr;
-        vector<int>     *nb_cell_per_UND_cluster = nullptr;
-        vector<double>  *min_time_per_UND_cluster = nullptr;
-        vector<int>     *nb_fit_solution_per_UND_cluster = nullptr;
-        vector<vector<double> > *x_is_on_reference_source_plane_per_UND_cluster = nullptr;
-        vector<vector<double> > *y_is_on_reference_source_plane_per_UND_cluster = nullptr;
-        vector<vector<double> > *z_is_on_reference_source_plane_per_UND_cluster = nullptr;
-        vector<vector<double> > *x_is_on_source_foil_per_UND_cluster = nullptr;
-        vector<vector<double> > *y_is_on_source_foil_per_UND_cluster = nullptr;
-        vector<vector<double> > *z_is_on_source_foil_per_UND_cluster = nullptr;
-        vector<vector<double> > *x_is_on_wire_per_UND_cluster = nullptr;
-        vector<vector<double> > *y_is_on_wire_per_UND_cluster = nullptr;
-        vector<vector<double> > *z_is_on_wire_per_UND_cluster = nullptr;
-        vector<vector<double> > *x_is_in_gas_per_UND_cluster = nullptr;
-        vector<vector<double> > *y_is_in_gas_per_UND_cluster = nullptr;
-        vector<vector<double> > *z_is_in_gas_per_UND_cluster = nullptr;
-        vector<vector<double> > *x_is_on_source_gap_per_UND_cluster = nullptr;
-        vector<vector<double> > *y_is_on_source_gap_per_UND_cluster = nullptr;
-        vector<vector<double> > *z_is_on_source_gap_per_UND_cluster = nullptr;
-        vector<vector<double> > *xy_distance_from_reference_source_plane_per_UND_cluster = nullptr;
-        vector<vector<double> > *xy_distance_from_source_foil_per_UND_cluster = nullptr;
-        vector<vector<double> > *xy_distance_from_wire_per_UND_cluster = nullptr;
-        vector<vector<double> > *xy_distance_from_gas_per_UND_cluster = nullptr;
-        vector<vector<double> > *xy_distance_from_source_gap_per_UND_cluster = nullptr;
-        vector<vector<double> > *xyz_distance_from_reference_source_plane_per_UND_cluster = nullptr;
-        vector<vector<double> > *xyz_distance_from_source_foil_per_UND_cluster = nullptr;
-        vector<vector<double> > *xyz_distance_from_wire_per_UND_cluster = nullptr;
-        vector<vector<double> > *xyz_distance_from_gas_per_UND_cluster = nullptr;
-        vector<vector<double> > *xyz_distance_from_source_gap_per_UND_cluster = nullptr;
-        bool          UND_is_on_reference_source_plane;
-        bool          UND_is_on_source_foil;
-        bool          UND_is_on_wire;
-        bool          UND_is_in_gas;
-        bool          UND_is_on_source_gap;
-        vector<vector<double> > *vertex_is_on_reference_source_plane_per_UND_cluster = nullptr;
-        vector<vector<double> > *vertex_is_on_source_foil_per_UND_cluster = nullptr;
-        vector<vector<double> > *vertex_is_on_wire_per_UND_cluster = nullptr;
-        vector<vector<double> > *vertex_is_in_gas_per_UND_cluster = nullptr;
-        vector<vector<double> > *vertex_is_on_source_gap_per_UND_cluster = nullptr;
-        vector<int> *elec_is_associated_with_track = nullptr;
+    vector<vector<double> > *cell_num_per_unfited_cluster = nullptr;
+    vector<vector<double> > *x_unfited_per_cluster = nullptr;
+    vector<vector<double> > *y_unfited_per_cluster = nullptr;
+    vector<vector<double> > *z_unfited_per_cluster = nullptr;
+    vector<vector<double> > *anodic_timestamp_per_unfited_cluster = nullptr;
+    vector<double>  *mean_anodic_timesmtap_per_unfited_cluster = nullptr;
+    vector<int>     *cluster_id_per_unfited_cluster = nullptr;
+    vector<int>     *cluster_id = nullptr;
+    vector<vector<double> > *min_dist_x_calo_unfitted_cluster = nullptr;
+    vector<vector<double> > *min_dist_y_calo_unfitted_cluster = nullptr;
+    vector<vector<double> > *min_dist_z_calo_unfitted_cluster = nullptr;
+    vector<vector<double> > *min_dist_r_calo_unfitted_cluster = nullptr;
+    vector<vector<double> > *ID_unfitted_cluster_per_gamma = nullptr;
+    vector<vector<double> > *time_diff_unfitted_per_gamma = nullptr;
  
 
 
-        double couleur;
+    double couleur;
 
-        // Set branch addresses.
-        particules->SetBranchAddress("event_number",&event_number);
-        particules->SetBranchAddress("nb_isolated_calo",&nb_isolated_calo);
-        particules->SetBranchAddress("E_isolated_calo",&E_isolated_calo);
-        particules->SetBranchAddress("time_isolated_calo",&time_isolated_calo);
-        particules->SetBranchAddress("sigma_E_isolated_calo",&sigma_E_isolated_calo);
-        particules->SetBranchAddress("sigma_time_isolated_calo",&sigma_time_isolated_calo);
-        particules->SetBranchAddress("isolated_calo_type",&isolated_calo_type);
-        particules->SetBranchAddress("isolated_calo_timestamp",&isolated_calo_timestamp);
-        particules->SetBranchAddress("isolated_calo_charge",&isolated_calo_charge);
-        particules->SetBranchAddress("isolated_calo_amplitude",&isolated_calo_amplitude);
-        particules->SetBranchAddress("isolated_calo_num",&isolated_calo_num);
-        particules->SetBranchAddress("sigma_isolated_calo_timestamp",&sigma_isolated_calo_timestamp);
-        particules->SetBranchAddress("sigma_isolated_calo_charge",&sigma_isolated_calo_charge);
-        particules->SetBranchAddress("sigma_isolated_calo_amplitude",&sigma_isolated_calo_amplitude);
-        particules->SetBranchAddress("evt_isolated_calo",&evt_isolated_calo);
-        particules->SetBranchAddress("isolated_calo_low_threshold_only",&isolated_calo_low_threshold_only);
-        particules->SetBranchAddress("isolated_calo_high_threshold",&isolated_calo_high_threshold);
-        particules->SetBranchAddress("x_calo_gamma",&x_calo_gamma);
-        particules->SetBranchAddress("y_calo_gamma",&y_calo_gamma);
-        particules->SetBranchAddress("z_calo_gamma",&z_calo_gamma);
+    // Set branch addresses.
+    particules->SetBranchAddress("event_number", &event_number);
+    particules->SetBranchAddress("nb_isolated_calo", &nb_isolated_calo);
+    particules->SetBranchAddress("E_isolated_calo", &E_isolated_calo);
+    particules->SetBranchAddress("time_isolated_calo", &time_isolated_calo);
+    particules->SetBranchAddress("sigma_E_isolated_calo", &sigma_E_isolated_calo);
+    particules->SetBranchAddress("sigma_time_isolated_calo", &sigma_time_isolated_calo);
+    particules->SetBranchAddress("isolated_calo_type", &isolated_calo_type);
+    particules->SetBranchAddress("isolated_calo_timestamp", &isolated_calo_timestamp);
+    particules->SetBranchAddress("isolated_calo_charge", &isolated_calo_charge);
+    particules->SetBranchAddress("isolated_calo_amplitude", &isolated_calo_amplitude);
+    particules->SetBranchAddress("isolated_calo_num", &isolated_calo_num);
+    particules->SetBranchAddress("sigma_isolated_calo_timestamp", &sigma_isolated_calo_timestamp);
+    particules->SetBranchAddress("sigma_isolated_calo_charge", &sigma_isolated_calo_charge);
+    particules->SetBranchAddress("sigma_isolated_calo_amplitude", &sigma_isolated_calo_amplitude);
+    particules->SetBranchAddress("evt_isolated_calo", &evt_isolated_calo);
+    particules->SetBranchAddress("isolated_calo_low_threshold_only", &isolated_calo_low_threshold_only);
+    particules->SetBranchAddress("isolated_calo_high_threshold", &isolated_calo_high_threshold);
+    particules->SetBranchAddress("x_calo_gamma", &x_calo_gamma);
+    particules->SetBranchAddress("y_calo_gamma", &y_calo_gamma);
+    particules->SetBranchAddress("z_calo_gamma", &z_calo_gamma);
+    particules->SetBranchAddress("gamma_with_unfitted_track",		  &gamma_with_unfitted_track);
 
-        particules->SetBranchAddress("tracks_with_associated_calo",&tracks_with_associated_calo);
-        particules->SetBranchAddress("nb_of_elec_candidates",&nb_of_elec_candidates);
-        particules->SetBranchAddress("cell_num_per_elec_cluster",&cell_num_per_elec_cluster);
-        particules->SetBranchAddress("OM_num_per_elec_cluster",&OM_num_per_elec_cluster);
-        particules->SetBranchAddress("E_OM_per_elec_cluster",&E_OM_per_elec_cluster);
-        particules->SetBranchAddress("nb_of_OM_per_elec_cluster",&nb_of_OM_per_elec_cluster);
-        particules->SetBranchAddress("anode_time_per_elec_cluster",&anode_time_per_elec_cluster);
-        particules->SetBranchAddress("top_cathode_per_elec_cluster",&top_cathode_per_elec_cluster);
-        particules->SetBranchAddress("bottom_cathode_per_elec_cluster",&bottom_cathode_per_elec_cluster);
-        particules->SetBranchAddress("OM_timestamp_per_elec_cluster",&OM_timestamp_per_elec_cluster);
-        particules->SetBranchAddress("OM_charge_per_elec_cluster",&OM_charge_per_elec_cluster);
-        particules->SetBranchAddress("OM_amplitude_per_elec_cluster",&OM_amplitude_per_elec_cluster);
-        particules->SetBranchAddress("OM_LT_only_per_elec_cluster",&OM_LT_only_per_elec_cluster);
-        particules->SetBranchAddress("OM_HT_per_elec_cluster",&OM_HT_per_elec_cluster);
-        particules->SetBranchAddress("z_of_cells_per_elec_cluster",&z_of_cells_per_elec_cluster);
-        particules->SetBranchAddress("sigma_z_of_cells_per_elec_cluster",&sigma_z_of_cells_per_elec_cluster);
-        particules->SetBranchAddress("r_of_cells_per_elec_cluster",&r_of_cells_per_elec_cluster);
-        particules->SetBranchAddress("sigma_r_of_cells_per_elec_cluster",&sigma_r_of_cells_per_elec_cluster);
-        particules->SetBranchAddress("elec_cluster_is_delayed",&elec_cluster_is_delayed);
-        particules->SetBranchAddress("elec_clsuter_is_prompt",&elec_clsuter_is_prompt);
-        particules->SetBranchAddress("x_start_per_elec_cluster",&x_start_per_elec_cluster);
-        particules->SetBranchAddress("y_start_per_elec_cluster",&y_start_per_elec_cluster);
-        particules->SetBranchAddress("z_start_per_elec_cluster",&z_start_per_elec_cluster);
-        particules->SetBranchAddress("x_end_per_elec_cluster",&x_end_per_elec_cluster);
-        particules->SetBranchAddress("y_end_per_elec_cluster",&y_end_per_elec_cluster);
-        particules->SetBranchAddress("z_end_per_elec_cluster",&z_end_per_elec_cluster);
-        particules->SetBranchAddress("ID_clsuter_per_elec_cluster",&ID_clsuter_per_elec_cluster);
 
-        particules->SetBranchAddress("nb_fit_solution_per_elec_cluster",&nb_fit_solution_per_elec_cluster);
-        particules->SetBranchAddress("nb_cell_per_elec_cluster",&nb_cell_per_elec_cluster);
-        particules->SetBranchAddress("x_is_on_reference_source_plane",&x_is_on_reference_source_plane);
-        particules->SetBranchAddress("y_is_on_reference_source_plane",&y_is_on_reference_source_plane);
-        particules->SetBranchAddress("z_is_on_reference_source_plane",&z_is_on_reference_source_plane);
-        particules->SetBranchAddress("x_is_on_source_foil",&x_is_on_source_foil);
-        particules->SetBranchAddress("y_is_on_source_foil",&y_is_on_source_foil);
-        particules->SetBranchAddress("z_is_on_source_foil",&z_is_on_source_foil);
-        particules->SetBranchAddress("x_is_on_main_calorimeter",&x_is_on_main_calorimeter);
-        particules->SetBranchAddress("y_is_on_main_calorimeter",&y_is_on_main_calorimeter);
-        particules->SetBranchAddress("z_is_on_main_calorimeter",&z_is_on_main_calorimeter);
-        particules->SetBranchAddress("x_is_on_x_calorimeter",&x_is_on_x_calorimeter);
-        particules->SetBranchAddress("y_is_on_x_calorimeter",&y_is_on_x_calorimeter);
-        particules->SetBranchAddress("z_is_on_x_calorimeter",&z_is_on_x_calorimeter);
-        particules->SetBranchAddress("x_is_on_gamma_veto",&x_is_on_gamma_veto);
-        particules->SetBranchAddress("y_is_on_gamma_veto",&y_is_on_gamma_veto);
-        particules->SetBranchAddress("z_is_on_gamma_veto",&z_is_on_gamma_veto);
-        particules->SetBranchAddress("x_is_on_wire",&x_is_on_wire);
-        particules->SetBranchAddress("y_is_on_wire",&y_is_on_wire);
-        particules->SetBranchAddress("z_is_on_wire",&z_is_on_wire);
-        particules->SetBranchAddress("x_is_in_gas",&x_is_in_gas);
-        particules->SetBranchAddress("y_is_in_gas",&y_is_in_gas);
-        particules->SetBranchAddress("z_is_in_gas",&z_is_in_gas);
-        particules->SetBranchAddress("x_is_on_source_gap",&x_is_on_source_gap);
-        particules->SetBranchAddress("y_is_on_source_gap",&y_is_on_source_gap);
-        particules->SetBranchAddress("z_is_on_source_gap",&z_is_on_source_gap);
-        particules->SetBranchAddress("xy_distance_from_reference_source_plane",&xy_distance_from_reference_source_plane);
-        particules->SetBranchAddress("xy_distance_from_source_foil",&xy_distance_from_source_foil);
-        particules->SetBranchAddress("xy_distance_from_main_calorimeter",&xy_distance_from_main_calorimeter);
-        particules->SetBranchAddress("xy_distance_from_x_calorimeter",&xy_distance_from_x_calorimeter);
-        particules->SetBranchAddress("xy_distance_from_gamma_veto",&xy_distance_from_gamma_veto);
-        particules->SetBranchAddress("xy_distance_from_wire",&xy_distance_from_wire);
-        particules->SetBranchAddress("xy_distance_from_gas",&xy_distance_from_gas);
-        particules->SetBranchAddress("xy_distance_from_source_gap",&xy_distance_from_source_gap);
-        particules->SetBranchAddress("xyz_distance_from_reference_source_plane",&xyz_distance_from_reference_source_plane);
-        particules->SetBranchAddress("xyz_distance_from_source_foil",&xyz_distance_from_source_foil);
-        particules->SetBranchAddress("xyz_distance_from_main_calorimeter",&xyz_distance_from_main_calorimeter);
-        particules->SetBranchAddress("xyz_distance_from_x_calorimeter",&xyz_distance_from_x_calorimeter);
-        particules->SetBranchAddress("xyz_distance_from_gamma_veto",&xyz_distance_from_gamma_veto);
-        particules->SetBranchAddress("xyz_distance_from_wire",&xyz_distance_from_wire);
-        particules->SetBranchAddress("xyz_distance_from_gas",&xyz_distance_from_gas);
-        particules->SetBranchAddress("xyz_distance_from_source_gap",&xyz_distance_from_source_gap);
-        particules->SetBranchAddress("vertex_is_on_reference_source_plane_per_elec_cluster",&vertex_is_on_reference_source_plane_per_elec_cluster);
-        particules->SetBranchAddress("vertex_is_on_source_foil_per_elec_cluster",&vertex_is_on_source_foil_per_elec_cluster);
-        particules->SetBranchAddress("vertex_is_on_main_calorimeter_per_elec_cluster",&vertex_is_on_main_calorimeter_per_elec_cluster);
-        particules->SetBranchAddress("vertex_is_on_x_calorimeter_per_elec_cluster",&vertex_is_on_x_calorimeter_per_elec_cluster);
-        particules->SetBranchAddress("vertex_is_on_gamma_veto_per_elec_cluster",&vertex_is_on_gamma_veto_per_elec_cluster);
-        particules->SetBranchAddress("vertex_is_on_wire_per_elec_cluster",&vertex_is_on_wire_per_elec_cluster);
-        particules->SetBranchAddress("vertex_is_in_gas_per_elec_cluster",&vertex_is_in_gas_per_elec_cluster);
-        particules->SetBranchAddress("vertex_is_on_source_gap_per_elec_cluster",&vertex_is_on_source_gap_per_elec_cluster);
+        
+    particules->SetBranchAddress("tracks_with_associated_calo", &tracks_with_associated_calo);
+    particules->SetBranchAddress("nb_of_elec_candidates", &nb_of_elec_candidates);
+    particules->SetBranchAddress("cell_num_per_elec_cluster", &cell_num_per_elec_cluster);
+    particules->SetBranchAddress("OM_num_per_elec_cluster", &OM_num_per_elec_cluster);
+    particules->SetBranchAddress("E_OM_per_elec_cluster", &E_OM_per_elec_cluster);
+    particules->SetBranchAddress("nb_of_OM_per_elec_cluster", &nb_of_OM_per_elec_cluster);
+    particules->SetBranchAddress("anode_time_per_elec_cluster", &anode_time_per_elec_cluster);
+    particules->SetBranchAddress("top_cathode_per_elec_cluster", &top_cathode_per_elec_cluster);
+    particules->SetBranchAddress("bottom_cathode_per_elec_cluster", &bottom_cathode_per_elec_cluster);
+    particules->SetBranchAddress("OM_timestamp_per_elec_cluster", &OM_timestamp_per_elec_cluster);
+    particules->SetBranchAddress("OM_charge_per_elec_cluster", &OM_charge_per_elec_cluster);
+    particules->SetBranchAddress("OM_amplitude_per_elec_cluster", &OM_amplitude_per_elec_cluster);
+    particules->SetBranchAddress("OM_LT_only_per_elec_cluster", &OM_LT_only_per_elec_cluster);
+    particules->SetBranchAddress("OM_HT_per_elec_cluster", &OM_HT_per_elec_cluster);
+    particules->SetBranchAddress("z_of_cells_per_elec_cluster", &z_of_cells_per_elec_cluster);
+    particules->SetBranchAddress("sigma_z_of_cells_per_elec_cluster", &sigma_z_of_cells_per_elec_cluster);
+    particules->SetBranchAddress("r_of_cells_per_elec_cluster", &r_of_cells_per_elec_cluster);
+    particules->SetBranchAddress("sigma_r_of_cells_per_elec_cluster", &sigma_r_of_cells_per_elec_cluster);
+    particules->SetBranchAddress("elec_cluster_is_delayed", &elec_cluster_is_delayed);
+    particules->SetBranchAddress("elec_clsuter_is_prompt", &elec_clsuter_is_prompt);
+    particules->SetBranchAddress("x_start_per_elec_cluster", &x_start_per_elec_cluster);
+    particules->SetBranchAddress("y_start_per_elec_cluster", &y_start_per_elec_cluster);
+    particules->SetBranchAddress("z_start_per_elec_cluster", &z_start_per_elec_cluster);
+    particules->SetBranchAddress("x_end_per_elec_cluster", &x_end_per_elec_cluster);
+    particules->SetBranchAddress("y_end_per_elec_cluster", &y_end_per_elec_cluster);
+    particules->SetBranchAddress("z_end_per_elec_cluster", &z_end_per_elec_cluster);
+    particules->SetBranchAddress("ID_clsuter_per_elec_cluster", &ID_clsuter_per_elec_cluster);
+    particules->SetBranchAddress("nb_fit_solution_per_elec_cluster", &nb_fit_solution_per_elec_cluster);
+    particules->SetBranchAddress("nb_cell_per_elec_cluster", &nb_cell_per_elec_cluster);
+    particules->SetBranchAddress("time_diff_OM_elec_per_elec_cluster", &time_diff_OM_elec_per_elec_cluster);
+    particules->SetBranchAddress("min_dist_r_calo_elefc_cluster", &min_dist_r_calo_elefc_cluster);
+    particules->SetBranchAddress("x_is_on_reference_source_plane", &x_is_on_reference_source_plane);
+    particules->SetBranchAddress("y_is_on_reference_source_plane", &y_is_on_reference_source_plane);
+    particules->SetBranchAddress("z_is_on_reference_source_plane", &z_is_on_reference_source_plane);
+    particules->SetBranchAddress("x_is_on_source_foil", &x_is_on_source_foil);
+    particules->SetBranchAddress("y_is_on_source_foil", &y_is_on_source_foil);
+    particules->SetBranchAddress("z_is_on_source_foil", &z_is_on_source_foil);
+    particules->SetBranchAddress("x_is_on_main_calorimeter", &x_is_on_main_calorimeter);
+    particules->SetBranchAddress("y_is_on_main_calorimeter", &y_is_on_main_calorimeter);
+    particules->SetBranchAddress("z_is_on_main_calorimeter", &z_is_on_main_calorimeter);
+    particules->SetBranchAddress("x_is_on_x_calorimeter", &x_is_on_x_calorimeter);
+    particules->SetBranchAddress("y_is_on_x_calorimeter", &y_is_on_x_calorimeter);
+    particules->SetBranchAddress("z_is_on_x_calorimeter", &z_is_on_x_calorimeter);
+    particules->SetBranchAddress("x_is_on_gamma_veto", &x_is_on_gamma_veto);
+    particules->SetBranchAddress("y_is_on_gamma_veto", &y_is_on_gamma_veto);
+    particules->SetBranchAddress("z_is_on_gamma_veto", &z_is_on_gamma_veto);
+    particules->SetBranchAddress("x_is_on_wire", &x_is_on_wire);
+    particules->SetBranchAddress("y_is_on_wire", &y_is_on_wire);
+    particules->SetBranchAddress("z_is_on_wire", &z_is_on_wire);
+    particules->SetBranchAddress("x_is_in_gas", &x_is_in_gas);
+    particules->SetBranchAddress("y_is_in_gas", &y_is_in_gas);
+    particules->SetBranchAddress("z_is_in_gas", &z_is_in_gas);
+    particules->SetBranchAddress("x_is_on_source_gap", &x_is_on_source_gap);
+    particules->SetBranchAddress("y_is_on_source_gap", &y_is_on_source_gap);
+    particules->SetBranchAddress("z_is_on_source_gap", &z_is_on_source_gap);
+    particules->SetBranchAddress("xy_distance_from_reference_source_plane", &xy_distance_from_reference_source_plane);
+    particules->SetBranchAddress("xy_distance_from_source_foil", &xy_distance_from_source_foil);
+    particules->SetBranchAddress("xy_distance_from_main_calorimeter", &xy_distance_from_main_calorimeter);
+    particules->SetBranchAddress("xy_distance_from_x_calorimeter", &xy_distance_from_x_calorimeter);
+    particules->SetBranchAddress("xy_distance_from_gamma_veto", &xy_distance_from_gamma_veto);
+    particules->SetBranchAddress("xy_distance_from_wire", &xy_distance_from_wire);
+    particules->SetBranchAddress("xy_distance_from_gas", &xy_distance_from_gas);
+    particules->SetBranchAddress("xy_distance_from_source_gap", &xy_distance_from_source_gap);
+    particules->SetBranchAddress("xyz_distance_from_reference_source_plane", &xyz_distance_from_reference_source_plane);
+    particules->SetBranchAddress("xyz_distance_from_source_foil", &xyz_distance_from_source_foil);
+    particules->SetBranchAddress("xyz_distance_from_main_calorimeter", &xyz_distance_from_main_calorimeter);
+    particules->SetBranchAddress("xyz_distance_from_x_calorimeter", &xyz_distance_from_x_calorimeter);
+    particules->SetBranchAddress("xyz_distance_from_gamma_veto", &xyz_distance_from_gamma_veto);
+    particules->SetBranchAddress("xyz_distance_from_wire", &xyz_distance_from_wire);
+    particules->SetBranchAddress("xyz_distance_from_gas", &xyz_distance_from_gas);
+    particules->SetBranchAddress("xyz_distance_from_source_gap", &xyz_distance_from_source_gap);
+    particules->SetBranchAddress("vertex_is_on_reference_source_plane_per_elec_cluster", &vertex_is_on_reference_source_plane_per_elec_cluster);
+    particules->SetBranchAddress("vertex_is_on_source_foil_per_elec_cluster", &vertex_is_on_source_foil_per_elec_cluster);
+    particules->SetBranchAddress("vertex_is_on_main_calorimeter_per_elec_cluster", &vertex_is_on_main_calorimeter_per_elec_cluster);
+    particules->SetBranchAddress("vertex_is_on_x_calorimeter_per_elec_cluster", &vertex_is_on_x_calorimeter_per_elec_cluster);
+    particules->SetBranchAddress("vertex_is_on_gamma_veto_per_elec_cluster", &vertex_is_on_gamma_veto_per_elec_cluster);
+    particules->SetBranchAddress("vertex_is_on_wire_per_elec_cluster", &vertex_is_on_wire_per_elec_cluster);
+    particules->SetBranchAddress("vertex_is_in_gas_per_elec_cluster", &vertex_is_in_gas_per_elec_cluster);
+    particules->SetBranchAddress("vertex_is_on_source_gap_per_elec_cluster", &vertex_is_on_source_gap_per_elec_cluster);
+    particules->SetBranchAddress("distance_elec_UND_per_elec_crossing", &distance_elec_UND_per_elec_crossing);
+    particules->SetBranchAddress("nb_elec_crossing", &nb_elec_crossing);
+    particules->SetBranchAddress("delta_t_cells_of_UND_per_elec_crossing", &delta_t_cells_of_UND_per_elec_crossing);
+    particules->SetBranchAddress("delta_t_cells_of_elec_per_elec_crossing", &delta_t_cells_of_elec_per_elec_crossing);
+    particules->SetBranchAddress("elec_used", &elec_used);
+    particules->SetBranchAddress("und_used", &und_used);
+    particules->SetBranchAddress("nb_of_cell_per_elec_crossing", &nb_of_cell_per_elec_crossing);
+    particules->SetBranchAddress("ID_cluster_per_elec_crossing", &ID_cluster_per_elec_crossing);
+    particules->SetBranchAddress("ID_cluster_UND_per_elec_crossing", &ID_cluster_UND_per_elec_crossing);
+    particules->SetBranchAddress("nb_cell_UND_of_elec_crossing", &nb_cell_UND_of_elec_crossing);
+    particules->SetBranchAddress("radius_of_cell_UND_of_elec_crossing", &radius_of_cell_UND_of_elec_crossing);
+    particules->SetBranchAddress("all_dt_cells_UND_per_elec_crossing", &all_dt_cells_UND_per_elec_crossing);
+    particules->SetBranchAddress("und_elec_crossing_xs", &und_elec_crossing_xs);
+    particules->SetBranchAddress("und_elec_crossing_ys", &und_elec_crossing_ys);
+    particules->SetBranchAddress("und_elec_crossing_zs", &und_elec_crossing_zs);
+    particules->SetBranchAddress("und_elec_crossing_xe", &und_elec_crossing_xe);
+    particules->SetBranchAddress("und_elec_crossing_ye", &und_elec_crossing_ye);
+    particules->SetBranchAddress("und_elec_crossing_ze", &und_elec_crossing_ze);
+    particules->SetBranchAddress("elec_is_associated_with_track", &elec_is_associated_with_track);
 
-        particules->SetBranchAddress("distance_elec_UND_per_elec_crossing",&distance_elec_UND_per_elec_crossing);
-        particules->SetBranchAddress("nb_elec_crossing",&nb_elec_crossing);
-        particules->SetBranchAddress("delta_t_cells_of_UND_per_elec_crossing",&delta_t_cells_of_UND_per_elec_crossing);
-        particules->SetBranchAddress("delta_t_cells_of_elec_per_elec_crossing",&delta_t_cells_of_elec_per_elec_crossing);
 
-        particules->SetBranchAddress("elec_used",&elec_used);
+    particules->SetBranchAddress("tracks_without_associated_calo", &tracks_without_associated_calo);
+    particules->SetBranchAddress("nb_of_UND_candidates", &nb_of_UND_candidates);
+    particules->SetBranchAddress("cell_num_per_UND_cluster", &cell_num_per_UND_cluster);
+    particules->SetBranchAddress("anode_time_per_UND_cluster", &anode_time_per_UND_cluster);
+    particules->SetBranchAddress("top_cathodes_per_UND_cluster", &top_cathodes_per_UND_cluster);
+    particules->SetBranchAddress("bottom_cathodes_per_UND_cluster", &bottom_cathodes_per_UND_cluster);
+    particules->SetBranchAddress("z_of_cell_per_UND_cluster", &z_of_cell_per_UND_cluster);
+    particules->SetBranchAddress("sigma_z_of_cells_per_UND_cluster", &sigma_z_of_cells_per_UND_cluster);
+    particules->SetBranchAddress("r_of_cells_per_UND_cluster", &r_of_cells_per_UND_cluster);
+    particules->SetBranchAddress("sigma_r_of_cells_per_UND_cluster", &sigma_r_of_cells_per_UND_cluster);
+    particules->SetBranchAddress("UND_cluster_is_delayed", &UND_cluster_is_delayed);
+    particules->SetBranchAddress("UND_cluster_is_prompt", &UND_cluster_is_prompt);
+    particules->SetBranchAddress("ID_clsuter_UND", &ID_clsuter_UND);
+    particules->SetBranchAddress("x_start_per_UND_cluster", &x_start_per_UND_cluster);
+    particules->SetBranchAddress("y_start_per_UND_cluster", &y_start_per_UND_cluster);
+    particules->SetBranchAddress("z_start_per_UND_cluster", &z_start_per_UND_cluster);
+    particules->SetBranchAddress("x_end_per_UND_cluster", &x_end_per_UND_cluster);
+    particules->SetBranchAddress("y_end_per_UND_cluster", &y_end_per_UND_cluster);
+    particules->SetBranchAddress("z_end_per_UND_cluster", &z_end_per_UND_cluster);
+    particules->SetBranchAddress("nb_cell_per_UND_cluster", &nb_cell_per_UND_cluster);
+    particules->SetBranchAddress("min_time_per_UND_cluster", &min_time_per_UND_cluster);
+    particules->SetBranchAddress("nb_fit_solution_per_UND_cluster", &nb_fit_solution_per_UND_cluster);
+    particules->SetBranchAddress("x_is_on_reference_source_plane_per_UND_cluster", &x_is_on_reference_source_plane_per_UND_cluster);
+    particules->SetBranchAddress("y_is_on_reference_source_plane_per_UND_cluster", &y_is_on_reference_source_plane_per_UND_cluster);
+    particules->SetBranchAddress("z_is_on_reference_source_plane_per_UND_cluster", &z_is_on_reference_source_plane_per_UND_cluster);
+    particules->SetBranchAddress("x_is_on_source_foil_per_UND_cluster", &x_is_on_source_foil_per_UND_cluster);
+    particules->SetBranchAddress("y_is_on_source_foil_per_UND_cluster", &y_is_on_source_foil_per_UND_cluster);
+    particules->SetBranchAddress("z_is_on_source_foil_per_UND_cluster", &z_is_on_source_foil_per_UND_cluster);
+    particules->SetBranchAddress("x_is_on_wire_per_UND_cluster", &x_is_on_wire_per_UND_cluster);
+    particules->SetBranchAddress("y_is_on_wire_per_UND_cluster", &y_is_on_wire_per_UND_cluster);
+    particules->SetBranchAddress("z_is_on_wire_per_UND_cluster", &z_is_on_wire_per_UND_cluster);
+    particules->SetBranchAddress("x_is_in_gas_per_UND_cluster", &x_is_in_gas_per_UND_cluster);
+    particules->SetBranchAddress("y_is_in_gas_per_UND_cluster", &y_is_in_gas_per_UND_cluster);
+    particules->SetBranchAddress("z_is_in_gas_per_UND_cluster", &z_is_in_gas_per_UND_cluster);
+    particules->SetBranchAddress("x_is_on_source_gap_per_UND_cluster", &x_is_on_source_gap_per_UND_cluster);
+    particules->SetBranchAddress("y_is_on_source_gap_per_UND_cluster", &y_is_on_source_gap_per_UND_cluster);
+    particules->SetBranchAddress("z_is_on_source_gap_per_UND_cluster", &z_is_on_source_gap_per_UND_cluster);
+    particules->SetBranchAddress("xy_distance_from_reference_source_plane_per_UND_cluster", &xy_distance_from_reference_source_plane_per_UND_cluster);
+    particules->SetBranchAddress("xy_distance_from_source_foil_per_UND_cluster", &xy_distance_from_source_foil_per_UND_cluster);
+    particules->SetBranchAddress("xy_distance_from_wire_per_UND_cluster", &xy_distance_from_wire_per_UND_cluster);
+    particules->SetBranchAddress("xy_distance_from_gas_per_UND_cluster", &xy_distance_from_gas_per_UND_cluster);
+    particules->SetBranchAddress("xy_distance_from_source_gap_per_UND_cluster", &xy_distance_from_source_gap_per_UND_cluster);
+    particules->SetBranchAddress("xyz_distance_from_reference_source_plane_per_UND_cluster", &xyz_distance_from_reference_source_plane_per_UND_cluster);
+    particules->SetBranchAddress("xyz_distance_from_source_foil_per_UND_cluster", &xyz_distance_from_source_foil_per_UND_cluster);
+    particules->SetBranchAddress("xyz_distance_from_wire_per_UND_cluster", &xyz_distance_from_wire_per_UND_cluster);
+    particules->SetBranchAddress("xyz_distance_from_gas_per_UND_cluster", &xyz_distance_from_gas_per_UND_cluster);
+    particules->SetBranchAddress("xyz_distance_from_source_gap_per_UND_cluster", &xyz_distance_from_source_gap_per_UND_cluster);
+    particules->SetBranchAddress("UND_is_on_reference_source_plane", &UND_is_on_reference_source_plane);
+    particules->SetBranchAddress("UND_is_on_source_foil", &UND_is_on_source_foil);
+    particules->SetBranchAddress("UND_is_on_wire", &UND_is_on_wire);
+    particules->SetBranchAddress("UND_is_in_gas", &UND_is_in_gas);
+    particules->SetBranchAddress("UND_is_on_source_gap", &UND_is_on_source_gap);
+    particules->SetBranchAddress("vertex_is_on_reference_source_plane_per_UND_cluster", &vertex_is_on_reference_source_plane_per_UND_cluster);
+    particules->SetBranchAddress("vertex_is_on_source_foil_per_UND_cluster", &vertex_is_on_source_foil_per_UND_cluster);
+    particules->SetBranchAddress("vertex_is_on_wire_per_UND_cluster", &vertex_is_on_wire_per_UND_cluster);
+    particules->SetBranchAddress("vertex_is_in_gas_per_UND_cluster", &vertex_is_in_gas_per_UND_cluster);
+    particules->SetBranchAddress("vertex_is_on_source_gap_per_UND_cluster", &vertex_is_on_source_gap_per_UND_cluster);
+    particules->SetBranchAddress("und_is_corrolated_with_gamma", &und_is_corrolated_with_gamma);
+    particules->SetBranchAddress("delta_t_UND_gamma_per_UND_cluster", &delta_t_UND_gamma_per_UND_cluster);
 
-        particules->SetBranchAddress("und_used",&und_used);
-        particules->SetBranchAddress("nb_of_cell_per_elec_crossing",&nb_of_cell_per_elec_crossing);
-        particules->SetBranchAddress("ID_cluster_per_elec_crossing",&ID_cluster_per_elec_crossing);
-        particules->SetBranchAddress("ID_cluster_UND_per_elec_crossing",&ID_cluster_UND_per_elec_crossing);
-        particules->SetBranchAddress("elec_is_associated_with_track", &elec_is_associated_with_track);
-
-        particules->SetBranchAddress("und_elec_crossing_xs", &und_elec_crossing_xs);
-        particules->SetBranchAddress("und_elec_crossing_ys", &und_elec_crossing_ys);
-        particules->SetBranchAddress("und_elec_crossing_zs", &und_elec_crossing_zs);
-        particules->SetBranchAddress("und_elec_crossing_xe", &und_elec_crossing_xe);
-        particules->SetBranchAddress("und_elec_crossing_ye", &und_elec_crossing_ye);
-        particules->SetBranchAddress("und_elec_crossing_ze", &und_elec_crossing_ze);
-
-        particules->SetBranchAddress("tracks_without_associated_calo",&tracks_without_associated_calo);
-        particules->SetBranchAddress("nb_of_UND_candidates",&nb_of_UND_candidates);
-        particules->SetBranchAddress("cell_num_per_UND_cluster",&cell_num_per_UND_cluster);
-        particules->SetBranchAddress("anode_time_per_UND_cluster",&anode_time_per_UND_cluster);
-        particules->SetBranchAddress("top_cathodes_per_UND_cluster",&top_cathodes_per_UND_cluster);
-        particules->SetBranchAddress("bottom_cathodes_per_UND_cluster",&bottom_cathodes_per_UND_cluster);
-        particules->SetBranchAddress("z_of_cell_per_UND_cluster",&z_of_cell_per_UND_cluster);
-        particules->SetBranchAddress("sigma_z_of_cells_per_UND_cluster",&sigma_z_of_cells_per_UND_cluster);
-        particules->SetBranchAddress("r_of_cells_per_UND_cluster",&r_of_cells_per_UND_cluster);
-        particules->SetBranchAddress("sigma_r_of_cells_per_UND_cluster",&sigma_r_of_cells_per_UND_cluster);
-        particules->SetBranchAddress("UND_cluster_is_delayed",&UND_cluster_is_delayed);
-        particules->SetBranchAddress("UND_cluster_is_prompt",&UND_cluster_is_prompt);
-        particules->SetBranchAddress("ID_clsuter_UND",&ID_clsuter_UND);
-        particules->SetBranchAddress("x_start_per_UND_cluster",&x_start_per_UND_cluster);
-        particules->SetBranchAddress("y_start_per_UND_cluster",&y_start_per_UND_cluster);
-        particules->SetBranchAddress("z_start_per_UND_cluster",&z_start_per_UND_cluster);
-        particules->SetBranchAddress("x_end_per_UND_cluster",&x_end_per_UND_cluster);
-        particules->SetBranchAddress("y_end_per_UND_cluster",&y_end_per_UND_cluster);
-        particules->SetBranchAddress("z_end_per_UND_cluster",&z_end_per_UND_cluster);
-        particules->SetBranchAddress("nb_cell_per_UND_cluster",&nb_cell_per_UND_cluster);
-        particules->SetBranchAddress("min_time_per_UND_cluster",&min_time_per_UND_cluster);
-        particules->SetBranchAddress("nb_fit_solution_per_UND_cluster",&nb_fit_solution_per_UND_cluster);
-        particules->SetBranchAddress("x_is_on_reference_source_plane_per_UND_cluster",&x_is_on_reference_source_plane_per_UND_cluster);
-        particules->SetBranchAddress("y_is_on_reference_source_plane_per_UND_cluster",&y_is_on_reference_source_plane_per_UND_cluster);
-        particules->SetBranchAddress("z_is_on_reference_source_plane_per_UND_cluster",&z_is_on_reference_source_plane_per_UND_cluster);
-
-        particules->SetBranchAddress("x_is_on_source_foil_per_UND_cluster",&x_is_on_source_foil_per_UND_cluster);
-        particules->SetBranchAddress("y_is_on_source_foil_per_UND_cluster",&y_is_on_source_foil_per_UND_cluster);
-        particules->SetBranchAddress("z_is_on_source_foil_per_UND_cluster",&z_is_on_source_foil_per_UND_cluster);
-        particules->SetBranchAddress("x_is_on_wire_per_UND_cluster",&x_is_on_wire_per_UND_cluster);
-        particules->SetBranchAddress("y_is_on_wire_per_UND_cluster",&y_is_on_wire_per_UND_cluster);
-        particules->SetBranchAddress("z_is_on_wire_per_UND_cluster",&z_is_on_wire_per_UND_cluster);
-        particules->SetBranchAddress("x_is_in_gas_per_UND_cluster",&x_is_in_gas_per_UND_cluster);
-        particules->SetBranchAddress("y_is_in_gas_per_UND_cluster",&y_is_in_gas_per_UND_cluster);
-        particules->SetBranchAddress("z_is_in_gas_per_UND_cluster",&z_is_in_gas_per_UND_cluster);
-        particules->SetBranchAddress("x_is_on_source_gap_per_UND_cluster",&x_is_on_source_gap_per_UND_cluster);
-        particules->SetBranchAddress("y_is_on_source_gap_per_UND_cluster",&y_is_on_source_gap_per_UND_cluster);
-        particules->SetBranchAddress("z_is_on_source_gap_per_UND_cluster",&z_is_on_source_gap_per_UND_cluster);
-        particules->SetBranchAddress("xy_distance_from_reference_source_plane_per_UND_cluster",&xy_distance_from_reference_source_plane_per_UND_cluster);
-        particules->SetBranchAddress("xy_distance_from_source_foil_per_UND_cluster",&xy_distance_from_source_foil_per_UND_cluster);
-        particules->SetBranchAddress("xy_distance_from_wire_per_UND_cluster",&xy_distance_from_wire_per_UND_cluster);
-        particules->SetBranchAddress("xy_distance_from_gas_per_UND_cluster",&xy_distance_from_gas_per_UND_cluster);
-        particules->SetBranchAddress("xy_distance_from_source_gap_per_UND_cluster",&xy_distance_from_source_gap_per_UND_cluster);
-        particules->SetBranchAddress("xyz_distance_from_reference_source_plane_per_UND_cluster",&xyz_distance_from_reference_source_plane_per_UND_cluster);
-        particules->SetBranchAddress("xyz_distance_from_source_foil_per_UND_cluster",&xyz_distance_from_source_foil_per_UND_cluster);
-        particules->SetBranchAddress("xyz_distance_from_wire_per_UND_cluster",&xyz_distance_from_wire_per_UND_cluster);
-        particules->SetBranchAddress("xyz_distance_from_gas_per_UND_cluster",&xyz_distance_from_gas_per_UND_cluster);
-        particules->SetBranchAddress("xyz_distance_from_source_gap_per_UND_cluster",&xyz_distance_from_source_gap_per_UND_cluster);
-        particules->SetBranchAddress("UND_is_on_reference_source_plane",&UND_is_on_reference_source_plane);
-        particules->SetBranchAddress("UND_is_on_source_foil",&UND_is_on_source_foil);
-        particules->SetBranchAddress("UND_is_on_wire",&UND_is_on_wire);
-        particules->SetBranchAddress("UND_is_in_gas",&UND_is_in_gas);
-        particules->SetBranchAddress("UND_is_on_source_gap",&UND_is_on_source_gap);
-        particules->SetBranchAddress("vertex_is_on_reference_source_plane_per_UND_cluster",&vertex_is_on_reference_source_plane_per_UND_cluster);
-        particules->SetBranchAddress("vertex_is_on_source_foil_per_UND_cluster",&vertex_is_on_source_foil_per_UND_cluster);
-        particules->SetBranchAddress("vertex_is_on_wire_per_UND_cluster",&vertex_is_on_wire_per_UND_cluster);
-        particules->SetBranchAddress("vertex_is_in_gas_per_UND_cluster",&vertex_is_in_gas_per_UND_cluster);
-        particules->SetBranchAddress("vertex_is_on_source_gap_per_UND_cluster",&vertex_is_on_source_gap_per_UND_cluster);
+    // Unfitted clusters
+    particules->SetBranchAddress("cell_num_per_unfited_cluster", &cell_num_per_unfited_cluster);
+    particules->SetBranchAddress("x_unfited_per_cluster", &x_unfited_per_cluster);
+    particules->SetBranchAddress("y_unfited_per_cluster", &y_unfited_per_cluster);
+    particules->SetBranchAddress("z_unfited_per_cluster", &z_unfited_per_cluster);
+    particules->SetBranchAddress("anodic_timestamp_per_unfited_cluster", &anodic_timestamp_per_unfited_cluster);
+    particules->SetBranchAddress("mean_anodic_timesmtap_per_unfited_cluster", &mean_anodic_timesmtap_per_unfited_cluster);
+    particules->SetBranchAddress("cluster_id_per_unfited_cluster", &cluster_id_per_unfited_cluster);
+    particules->SetBranchAddress("cluster_id", &cluster_id);
+    particules->SetBranchAddress("min_dist_x_calo_unfitted_cluster", &min_dist_x_calo_unfitted_cluster);
+    particules->SetBranchAddress("min_dist_y_calo_unfitted_cluster", &min_dist_y_calo_unfitted_cluster);
+    particules->SetBranchAddress("min_dist_z_calo_unfitted_cluster", &min_dist_z_calo_unfitted_cluster);
+    particules->SetBranchAddress("min_dist_r_calo_unfitted_cluster", &min_dist_r_calo_unfitted_cluster);
+    particules->SetBranchAddress("ID_unfitted_cluster_per_gamma", &ID_unfitted_cluster_per_gamma);
+    particules->SetBranchAddress("time_diff_unfitted_per_gamma", &time_diff_unfitted_per_gamma);
 
         // create output ROOT file and TTree to store electron-UND pair information
     outFile->cd();
@@ -758,7 +840,8 @@ void PTD_BiPo(int run){
     int t_elec_is_associated_with_track;
     int run_number = run;
     int OM_num_elec; 
-
+    bool und_with_gamma;
+    bool t_und_is_corrolated_with_gamma;
     double x_reference_source_elec;
     double y_reference_source_elec;
     double z_reference_source_elec;
@@ -770,12 +853,23 @@ void PTD_BiPo(int run){
     
     double xM, yM, zM;
     double distance_vertex;
-
+    vector<double> t_delta_t_UND_gamma_per_UND_cluster;
 
     double distance_gamma_BiPo_vertex = -1; 
     vector<double> delta_t_e_gamma_th_vs_meas;
     vector<double> E_gamma_BiPo; 
     int n_gamm_with_BiPo = 0;
+    double angle_e_alpha;
+    double theta_elec;
+    double theta_alpha;
+    double phi_elec;
+    double phi_alpha;
+    double delta_theta_elec_alpha;
+    double delta_phi_elec_alpha;
+    vector<double> z_of_cell_alpha;
+    vector<double> t_r_of_cells_per_elec_cluster;
+    vector<double> t_r_of_cells_per_UND_cluster;
+
 
 
     double c = 299792458; // speed of light in m/s
@@ -788,6 +882,15 @@ void PTD_BiPo(int run){
     pairTree->Branch("undFit", &t_undFit, "undFit/I");
     pairTree->Branch("minDist", &t_minDist, "minDist/D");
     pairTree->Branch("timeDelay", &t_timeDelay, "timeDelay/D");
+
+    pairTree->Branch("angle_e_alpha", &angle_e_alpha, "angle_e_alpha/D");
+    pairTree->Branch("theta_elec", &theta_elec);
+    pairTree->Branch("theta_alpha", &theta_alpha);
+    pairTree->Branch("phi_elec", &phi_elec);
+    pairTree->Branch("phi_alpha", &phi_alpha);
+    pairTree->Branch("delta_theta_elec_alpha", &delta_theta_elec_alpha);
+    pairTree->Branch("delta_phi_elec_alpha", &delta_phi_elec_alpha);
+
     pairTree->Branch("elec_xs", &t_elec_xs, "elec_xs/D");
     pairTree->Branch("elec_ys", &t_elec_ys, "elec_ys/D");
     pairTree->Branch("elec_zs", &t_elec_zs, "elec_zs/D");
@@ -808,13 +911,12 @@ void PTD_BiPo(int run){
     pairTree->Branch("elec_crossing", &t_elec_crossing);
     pairTree->Branch("elecClusterID", &t_elecClusterID, "elecClusterID/I");
     pairTree->Branch("undClusterID", &t_undClusterID, "undClusterID/I");
+    pairTree->Branch("t_und_is_corrolated_with_gamma", &t_und_is_corrolated_with_gamma);
+    pairTree->Branch("t_delta_t_UND_gamma_per_UND_cluster", &t_delta_t_UND_gamma_per_UND_cluster);
     pairTree->Branch("elec_is_associated_with_track", &t_elec_is_associated_with_track);
     pairTree->Branch("OM_num_elec", &OM_num_elec);
-
-    pairTree->Branch("x_reference_source_elec", &x_reference_source_elec);
-    pairTree->Branch("y_reference_source_elec", &y_reference_source_elec);
-    pairTree->Branch("z_reference_source_elec", &z_reference_source_elec);
-
+    pairTree->Branch("r_of_cells_per_elec_cluster", &t_r_of_cells_per_elec_cluster);
+    pairTree->Branch("r_of_cells_per_UND_cluster", &t_r_of_cells_per_UND_cluster);
     pairTree->Branch("x_reference_source_und", &x_reference_source_und);
     pairTree->Branch("y_reference_source_und", &y_reference_source_und);
     pairTree->Branch("z_reference_source_und", &z_reference_source_und);
@@ -837,10 +939,12 @@ void PTD_BiPo(int run){
     pairTree->Branch("mean_delta_t_UND_per_elec_crossing", &t_mean_delta_t_UND_per_elec_crossing);
     pairTree->Branch("delta_t_cells_of_UND_per_elec_crossing", &t_delta_t_cells_of_UND_per_elec_crossing);
     pairTree->Branch("delta_t_cells_of_elec_per_elec_crossing", &t_delta_t_cells_of_elec_per_elec_crossing);
-    pairTree->Branch("time_of_the_run", &time_of_the_run);
-    pairTree->Branch("run_start_time", &run_start_time);
-    pairTree->Branch("run_number", &run_number);
-    if(info.found){
+    if(MC==false){
+        pairTree->Branch("time_of_the_run", &time_of_the_run);
+        pairTree->Branch("run_start_time", &run_start_time);
+        pairTree->Branch("run_number", &run_number);
+    }
+    if(info.found && MC==false){
         std::cout<<"Run found in database, start time (unix) = "<<info.run_start<<", duration = "<<info.duration<<" ns, trip time = "<<info.tripTime<<" ns"<<std::endl;
     }
     else{
@@ -851,7 +955,7 @@ void PTD_BiPo(int run){
 
     for(int entry = 0; entry <= particules->GetEntries(); entry++) {
 
-
+    
 
         //sndisplay::demonstrator *sndemonstrator = new sndisplay::demonstrator ("demonstrator_test");
         //sndemonstrator->setrange(0,1);
@@ -860,33 +964,34 @@ void PTD_BiPo(int run){
         delta_t_e_gamma_th_vs_meas.clear();
         E_gamma_BiPo.clear();
         n_gamm_with_BiPo = 0;
+        z_of_cell_alpha.clear();
+        if(MC == false){
+            if(info.found ){
 
-        if(info.found){
-            
-            
-            double time_entry;
-            double stop_time = info.tripTime;
-            double unix_time_to_stop = info.run_start + stop_time;
-            
-            
-            if(OM_timestamp_per_elec_cluster->size()>0){
-                time_entry= OM_timestamp_per_elec_cluster->at(0).at(0);
-            }
-            //std::cout<<"Event "<<event_number<<" time: "<<time_entry<<" & tunix_time_to_stop: "<<unix_time_to_stop<<std::endl;
-            if(time_entry>= stop_time){
-                
-                std::cout<<"Event "<<event_number<<" skipped because after the stop time of the run ("<<stop_time<<")"<<std::endl;
+
+                double time_entry;
+                double stop_time = info.tripTime;
+                double unix_time_to_stop = info.run_start + stop_time;
+
+
+                if(OM_timestamp_per_elec_cluster->size()>0){
+                    time_entry= OM_timestamp_per_elec_cluster->at(0).at(0);
+                }
+                //std::cout<<"Event "<<event_number<<" time: "<<time_entry<<" & tunix_time_to_stop: "<<unix_time_to_stop<<std::endl;
+                if(time_entry>= stop_time){
+
+                    std::cout<<"Event "<<event_number<<" skipped because after the stop time of the run ("<<stop_time<<")"<<std::endl;
+                    time_of_the_run = stop_time;
+
+                    break;  
+                }
                 time_of_the_run = stop_time;
-                
-                break;  
             }
-            time_of_the_run = stop_time;
+            else{
+                time_of_the_run = info.duration;
+            }
+            run_start_time = info.run_start;
         }
-        else{
-            time_of_the_run = info.duration;
-        }
-        run_start_time = info.run_start;
-
         
 
 		if(tracks_with_associated_calo && tracks_without_associated_calo){
@@ -909,8 +1014,10 @@ void PTD_BiPo(int run){
                     double x_reference_source = std::numeric_limits<double>::quiet_NaN();
                     double y_reference_source = std::numeric_limits<double>::quiet_NaN();
                     double z_reference_source = std::numeric_limits<double>::quiet_NaN();
-
+                    bool und_with_gamma;
+                    vector<double> UND_t_delta_t_UND_gamma_per_UND_cluster;
                     double und_elec_crossing_xs, und_elec_crossing_ys, und_elec_crossing_zs, und_elec_crossing_xe, und_elec_crossing_ye, und_elec_crossing_ze;
+
 
 		        };
 		        struct PairInfo {
@@ -930,6 +1037,8 @@ void PTD_BiPo(int run){
                     double z_reference_source_und = std::numeric_limits<double>::quiet_NaN();
                     int vertex_is_on_source_foil_elec;
                     int vertex_is_on_source_foil_und;
+                    bool und_with_gamma;
+                    vector<double> UND_t_delta_t_UND_gamma_per_UND_cluster; 
 		        };
 			
 		        // collect fits
@@ -956,6 +1065,7 @@ void PTD_BiPo(int run){
                         f.y_reference_source = y_is_on_reference_source_plane->at(elec_idx).at(elec_fit_idx);
                         f.z_reference_source = z_is_on_reference_source_plane->at(elec_idx).at(elec_fit_idx);
                         f.vertex_is_on_source_foil = vertex_is_on_source_foil_per_elec_cluster->at(elec_idx).at(elec_fit_idx);
+
                        
                         
 
@@ -981,6 +1091,8 @@ void PTD_BiPo(int run){
                         u.y_reference_source = y_is_on_reference_source_plane_per_UND_cluster->at(und_idx).at(und_fit_idx);
                         u.z_reference_source = z_is_on_reference_source_plane_per_UND_cluster->at(und_idx).at(und_fit_idx);
                         u.vertex_is_on_source_foil = vertex_is_on_source_foil_per_UND_cluster->at(und_idx).at(und_fit_idx);
+                        u.und_with_gamma = und_is_corrolated_with_gamma->at(und_idx);
+                        u.UND_t_delta_t_UND_gamma_per_UND_cluster = delta_t_UND_gamma_per_UND_cluster->at(und_idx);
 		                
 						undFits.push_back(u);
 		            }
@@ -1006,6 +1118,8 @@ void PTD_BiPo(int run){
                         p.cluster_ID_elec = ef.cluster_ID;
                         p.cluster_ID_und = uf.cluster_ID;
                         p.OM_num = ef.OM_num;
+                        p.und_with_gamma = uf.und_with_gamma;
+                        p.UND_t_delta_t_UND_gamma_per_UND_cluster = uf.UND_t_delta_t_UND_gamma_per_UND_cluster;
                         
                         p.x_reference_source_elec = ef.x_reference_source;
                         p.y_reference_source_elec = ef.y_reference_source;
@@ -1017,7 +1131,7 @@ void PTD_BiPo(int run){
 
                         p.vertex_is_on_source_foil_elec = ef.vertex_is_on_source_foil;
                         p.vertex_is_on_source_foil_und = uf.vertex_is_on_source_foil;
-		                
+
                         allPairs.push_back(p);
 		            }
 		        }
@@ -1066,7 +1180,9 @@ void PTD_BiPo(int run){
         		    t_timeDelay = p.timeDelay;
         		    t_elecClusterID = p.cluster_ID_elec;
         		    t_undClusterID = p.cluster_ID_und;
-                    
+                    t_und_is_corrolated_with_gamma = p.und_with_gamma;
+                    t_delta_t_UND_gamma_per_UND_cluster = p.UND_t_delta_t_UND_gamma_per_UND_cluster;
+         		    
         		    
         		    t_elec_xs = x_start_per_elec_cluster->at(p.elecIdx).at(p.elecFit);
 
@@ -1087,13 +1203,21 @@ void PTD_BiPo(int run){
         		    t_elec_energy = E_OM_per_elec_cluster->at(p.elecIdx).at(0);
         		    t_elec_time = OM_timestamp_per_elec_cluster->at(p.elecIdx).at(0);
                     OM_num_elec = p.OM_num;
+                    z_of_cell_alpha = z_of_cell_per_UND_cluster->at(p.undIdx);
                     
+                    //std::cout<<"================= EVENT : "<<event_number<< " ================="<<std::endl;
+                    //
+                    //std::cout<<"OM_num_elec = "<<OM_num_elec<<std::endl;
+                    //for(int k = 0; k < OM2kill.size(); k++ ){
+                    //    std::cout<<"OM : "<<OM2kill.at(k)<<std::endl;
+                    //}
+
                     //if(std::find(OM2kill.begin(), OM2kill.end(), OM_num_elec) != OM2kill.end()){ // OM Flag as bad ? if yes then pass this candidates
                     //    // skip this pair but continue filling other pairs for the same event
+                    //    //std::cout<<"OM_num_elec = "<<OM_num_elec<<std::endl;
+                    //    //std::cout<<"std::find(OM2kill.begin(), OM2kill.end(), OM_num_elec) != OM2kill.end() = " << (std::find(OM2kill.begin(), OM2kill.end(), OM_num_elec) != OM2kill.end()) <<std::endl;
                     //    continue;
                     //}
-                    
-
                     
         		    // fill UND info 
         		    t_und_xs = x_start_per_UND_cluster->at(p.undIdx).at(p.undFit);
@@ -1107,6 +1231,11 @@ void PTD_BiPo(int run){
 					t_nb_cell_alpha = nb_cell_per_UND_cluster->at(p.undIdx);
                     t_elec_crossing = elec_used->at(p.elecIdx);
                     t_nb_of_elec_candidates = nb_of_elec_candidates;
+                    
+                    t_r_of_cells_per_elec_cluster = r_of_cells_per_elec_cluster->at(p.elecIdx);
+                    t_r_of_cells_per_UND_cluster = r_of_cells_per_UND_cluster->at(p.undIdx);
+
+
                     // Clear vectors before filling
                     t_distance_elec_UND_per_elec_crossing.clear();
                     t_delta_t_cells_of_UND_per_elec_crossing.clear();
@@ -1142,7 +1271,19 @@ void PTD_BiPo(int run){
 
                     // Half distance between the two tracks calculation : https://www.youtube.com/watch?v=HC5YikQxwZA :) 
                     
-
+                    // Angle between elec and alpha track calculation : 
+                    /* 
+                                   z
+                                   ↑
+                                   |
+                                   |   θ
+                                   |  /
+                                   | /
+                                   O----------→ x
+                                  /
+                                 /
+                                y
+                    */
 
                     if(t_elec_crossing == false){
                         Vec3 A  = {t_elec_xs, t_elec_ys, t_elec_zs};
@@ -1167,7 +1308,30 @@ void PTD_BiPo(int run){
                             yM = M.y;
                             zM = M.z;
                             distance_vertex = distance;
+                            
                         }
+                        
+                        Vec3 u = B - A; // electron
+                        Vec3 v = B2 - A2; // alpha
+                        double nu = norm(u);
+                        double nv = norm(v);
+                        double cos_theta = dot(u, v) / (nu * nv);
+                        // numerical safety
+                        cos_theta = std::max(-1.0, std::min(1.0, cos_theta));
+                        angle_e_alpha = acos(cos_theta) * 180.0 / M_PI;
+
+                        theta_elec = acos(u.z / nu) * 180.0 / M_PI;
+                        theta_alpha = acos(v.z / nv) * 180.0 / M_PI;
+                        phi_elec = atan2(u.y, u.x) * 180.0 / M_PI;
+                        phi_alpha = atan2(v.y, v.x) * 180.0 / M_PI;
+
+                        delta_theta_elec_alpha = theta_elec - theta_alpha;
+                        
+                        delta_phi_elec_alpha = phi_elec - phi_alpha;
+
+                        // wrap to [-180, 180]
+                        while (delta_phi_elec_alpha >  180.0) delta_phi_elec_alpha -= 360.0;
+                        while (delta_phi_elec_alpha < -180.0) delta_phi_elec_alpha += 360.0;
                     
                     } 
                     
@@ -1196,6 +1360,24 @@ void PTD_BiPo(int run){
                             zM = M.z;
                             distance_vertex = distance;
                         }
+                        Vec3 u = B - A; // electron
+                        Vec3 v = B2 - A2; // alpha
+                        double nu = norm(u);
+                        double nv = norm(v);
+                        double cos_theta = dot(u, v) / (nu * nv);
+                        
+                        cos_theta = std::max(-1.0, std::min(1.0, cos_theta));
+                        angle_e_alpha = acos(cos_theta) * 180.0 / M_PI;
+                        theta_elec = acos(u.z / nu) * 180.0 / M_PI;
+                        theta_alpha = acos(v.z / nv) * 180.0 / M_PI;
+                        phi_elec = atan2(u.y, u.x) * 180.0 / M_PI;
+                        phi_alpha = atan2(v.y, v.x) * 180.0 / M_PI;
+                        delta_theta_elec_alpha = theta_elec - theta_alpha;
+                        delta_phi_elec_alpha = phi_elec - phi_alpha;
+
+                        // wrap to [-180, 180]
+                        while (delta_phi_elec_alpha >  180.0) delta_phi_elec_alpha -= 360.0;
+                        while (delta_phi_elec_alpha < -180.0) delta_phi_elec_alpha += 360.0;
                     }
 
                     double elec_track_length = -1;
@@ -1229,29 +1411,45 @@ void PTD_BiPo(int run){
 
                     if(nb_isolated_calo > 0){
                         for(int calo_idx =0; calo_idx < nb_isolated_calo; calo_idx++){
-                            double calo_x = x_calo_gamma->at(calo_idx);
-                            double calo_y = y_calo_gamma->at(calo_idx);
-                            double calo_z = z_calo_gamma->at(calo_idx);
-                            distance_gamma_BiPo_vertex = -1; 
-                            if(std::isnan(xM) || std::isnan(yM) || std::isnan(zM)){
-                                distance_gamma_BiPo_vertex = sqrt( pow((calo_x - t_elec_xs),2) + pow((calo_y - t_elec_ys),2) + pow((calo_z - t_elec_zs),2) )/1000; // in meters
-                            }
-                            else{
-                                distance_gamma_BiPo_vertex = sqrt( pow((calo_x - xM),2) + pow((calo_y - yM),2) + pow((calo_z - zM),2) )/1000; // in meters
-                                //std::cout<<"Distance calo to M: "<<distance_calo_to_M<<std::endl;
-                            }
-                            double expected_TOF_gamma = distance_gamma_BiPo_vertex/c;
-                            double measured_TOF_gamma = t_elec_time - isolated_calo_timestamp->at(calo_idx);
-                            double beta = sqrt(t_elec_energy*(t_elec_energy + 2*0.511/pow(c, 2)))/(t_elec_energy+ 2*0.511);
-                            double expected_TOF_elec = elec_track_length/(beta*c);
-                            n_gamm_with_BiPo ++;
+                            if(gamma_with_unfitted_track->at(calo_idx) == 0){
+                                
+                            
+                                double calo_x = x_calo_gamma->at(calo_idx);
+                                double calo_y = y_calo_gamma->at(calo_idx);
+                                double calo_z = z_calo_gamma->at(calo_idx);
+                                distance_gamma_BiPo_vertex = -1; 
+                                if(std::isnan(xM) || std::isnan(yM) || std::isnan(zM)){
+                                    distance_gamma_BiPo_vertex = sqrt( pow((calo_x - t_elec_xs),2) + pow((calo_y - t_elec_ys),2) + pow((calo_z - t_elec_zs),2) )/1000; // in meters
+                                }
+                                else{
+                                    distance_gamma_BiPo_vertex = sqrt( pow((calo_x - xM),2) + pow((calo_y - yM),2) + pow((calo_z - zM),2) )/1000; // in meters
+                                    //std::cout<<"Distance calo to M: "<<distance_calo_to_M<<std::endl;
+                                }
+                                double expected_TOF_gamma = distance_gamma_BiPo_vertex/c;
+                                double measured_TOF_gamma = t_elec_time - isolated_calo_timestamp->at(calo_idx);
+                                double beta = sqrt(t_elec_energy*(t_elec_energy + 2*0.511/pow(c, 2)))/(t_elec_energy+ 2*0.511);
+                                double expected_TOF_elec = elec_track_length/(beta*c);
+                                n_gamm_with_BiPo ++;
 
-                            //delta_t_e_gamma_th_vs_meas.push_back(expected_TOF_gamma - measured_TOF_gamma);
-                            delta_t_e_gamma_th_vs_meas.push_back(isolated_calo_timestamp->at(calo_idx) - t_elec_time - (expected_TOF_gamma - expected_TOF_elec) );
-                            E_gamma_BiPo.push_back(E_isolated_calo->at(calo_idx));
+                                //delta_t_e_gamma_th_vs_meas.push_back(expected_TOF_gamma - measured_TOF_gamma);
+                                delta_t_e_gamma_th_vs_meas.push_back(isolated_calo_timestamp->at(calo_idx) - t_elec_time - (expected_TOF_gamma - expected_TOF_elec) );
+                                E_gamma_BiPo.push_back(E_isolated_calo->at(calo_idx));
+                            }
                         }
                     }
-                    
+                    bool z_cell_alpha_out_of_tracker = false;
+                    for(double z : z_of_cell_alpha){
+                        if(z> 1500 || z < -1500){ // only keep cell of the alpha track that are in the tracker
+                            z_cell_alpha_out_of_tracker = true;
+                        }
+                    }
+                    //if(z_cell_alpha_out_of_tracker){
+                    //    std::cout<<"Event "<<event_number<<" skipped because at least one cell of the alpha track is out of the tracker"<<std::endl;
+                    //    continue;
+                    //}
+                    //if(t_und_is_corrolated_with_gamma==true){
+                    //    continue;
+                    //}
                     pairTree->Fill();
         		}
 		    }
